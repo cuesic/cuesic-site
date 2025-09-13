@@ -6,6 +6,7 @@
   align-items: flex-start;
   margin-top: 32px;
   margin-bottom: 12px;
+  padding: 0 20px;
 }
 .founder {
   display: flex;
@@ -21,6 +22,23 @@
   box-shadow: 0 4px 24px 0 rgba(203,108,230,0.10);
   margin-bottom: 16px;
   background: #222;
+}
+
+@media (max-width: 768px) {
+  .founders-grid {
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+  }
+  
+  .founder {
+    max-width: 180px;
+  }
+  
+  .founder-img {
+    width: 160px;
+    height: 160px;
+  }
 }
 .founder-name {
   font-size: 1.15rem;
@@ -78,7 +96,83 @@ body{
   background: var(--surface);      /* solid background to avoid banding */
   line-height:1.6;
   padding-top: var(--header-h);    /* offset for fixed header */
+  overflow-x: hidden;              /* prevent horizontal scroll on mobile menu */
 }
+/* Mobile Navigation Styles */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1000;
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  position: relative;
+  transition: background .2s;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  transition: transform .2s;
+}
+
+.hamburger::before { top: -8px; }
+.hamburger::after { bottom: -8px; }
+
+.nav-toggle.active .hamburger {
+  background: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.nav-toggle.active .hamburger::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: var(--header-h);
+    right: -100%;
+    width: 100%;
+    height: calc(100vh - var(--header-h));
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: right .3s ease;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-menu li {
+    margin: 20px 0;
+  }
+}
+
 /* Site-wide ambient glow (fixed) */
 body::before{
   content:"";
@@ -117,6 +211,20 @@ h3{ font-size:clamp(20px, 2.4vw, 24px) }
   margin:0;
   padding:0 60px 0 100px;   /* more right padding to move links away from edge */
   display:flex; align-items:center; justify-content:space-between;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 24px;
+  }
+  
+  .nav .brand {
+    margin-right: auto; /* Push logo to the left */
+  }
+  
+  .nav .brand-mark {
+    height: 32px; /* Slightly smaller logo on mobile */
+  }
 }
 
 .nav .brand{
