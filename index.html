@@ -39,7 +39,7 @@
     <div class="hero-inner">
       <img src="assets/fullwhiteTransp.png" alt="Cuesic logo" class="logo drop-in" />
       <h1 class="tagline">EDM News • Promotion • Events</h1>
-      <a class="cta" href="#socials">Check the latest</a>
+  <a class="cta" href="#events">Check Our Events</a>
     </div>
     <!-- ambient glow -->
     <div class="glow"></div>
@@ -130,6 +130,27 @@
   <footer class="site-footer">
     <p>© <span id="year"></span> Cuesic • Made for the EDM community</p>
   </footer>
+
+  <!-- Event details modal -->
+  <div id="event-modal" class="modal" aria-hidden="true">
+    <div class="modal-overlay" data-close></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="event-title">
+  <button class="modal-close" aria-label="Close">Close</button>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div class="modal-flyer">
+            <img id="modal-flyer" src="" alt="" style="display:none; width:100%; height:auto; border-radius:12px;" />
+          </div>
+          <div class="modal-info">
+            <h3 id="event-title"></h3>
+            <p id="event-desc"></p>
+            <p class="meta" id="event-meta"></p>
+            <a id="event-ticket" class="button" target="_blank" rel="noopener" style="display:none; margin-top:12px;">Get tickets</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
   <script>
