@@ -54,13 +54,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const EVENTS = [
   // Single event: Pizza Pop Up
   {
-    title: "Pizza Shop DJ Pop-Up",
-    date: "2025-12-06T15:00",
-    venue: "TBD",
+    title: "Coffee Shop DJ Pop-Up",
+    date: "2025-12-13T13:00",
+    venue: "Haraz Coffee House",
     city: "New Brunswick, NJ",
-    link: "https://www.flite.city/e/pizza-shop-pop-up-presented-by-cuesic1",
-    flyer: "assets/pizza_flyer.png", 
-    description: "When the bass hits just right...\nand the slice is still hot \nWe are flipping the lights and the vibe at a pizza shop near you! \n\nCUESIC is hosting a Pizza Shop Pop-Up in New Brunswick. \nA mix of EDM beats, good vibes, and cheesy goodness. \n\nCome hungry for music, stay for the pizza. \n\nDetails coming soon — RSVP to stay in the loop. This one’s going to sell out fast. \nStay saucy..."
+    link: "https://www.flite.city/e/haraz-coffee-house-dj-pop-up-001",
+    flyer: "assets/HarazCoffeeFlyer1.png", 
+    description: "Cuesic is bringing the energy to Haraz Coffee House for New Brunswick's first ever Coffee Shop DJ Pop-Up!\n\nCome enjoy fresh music, good vibes, and your favorite drinks right here in your own city!\n\nWhy go to NYC or Philly for a Coffee Rave when we are bringing it right to YOU!?!\n\n Grab your <strong class=\"brand-strong\">FREE</strong> ticket and enjoy <strong class=\"brand-strong\">15% off</strong> all your purchases when you show your QR code at checkout!"
   }
 ];
 
@@ -121,7 +121,8 @@ function openModalFor(idx){
   const ev = EVENTS[idx];
   if(!ev) return;
   modalTitle.textContent = ev.title;
-  modalDesc.textContent = ev.description || '';
+  // render description as HTML so <strong> tags work, and preserve newlines
+  modalDesc.innerHTML = (ev.description || '').replace(/\n/g, '<br>');
   modalMeta.textContent = `${formatDate(ev.date)} • ${ev.venue}${ev.city ? ` — ${ev.city}` : ''}`;
   if(ev.flyer){ modalFlyer.src = ev.flyer; modalFlyer.alt = ev.title + ' flyer'; modalFlyer.style.display = 'block'; }
   else { modalFlyer.style.display = 'none'; }
