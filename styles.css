@@ -295,6 +295,20 @@ h3{ font-size:clamp(20px, 2.4vw, 24px) }
 }
 .cta:hover{ transform:translateY(-1px); }
 
+.cta-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .cta-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 /* Old hero .glow element disabled (using section glow instead) */
 .glow{ display:none; }
 
@@ -609,16 +623,112 @@ h3{ font-size:clamp(20px, 2.4vw, 24px) }
     /* mobile-friendly pill style (keeps same visual as desktop)
        small horizontal nudge to sit clearly outside flyer */
     padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.96);
-    color: #0b0b0d;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.18);
-    font-size: 0.95rem;
-    line-height: 1;
-    border: none;
-    cursor: pointer;
-    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
-    margin-right: -10px; /* slight overlap so it sits outside the modal edge */
-  }
+}
+
+/* ================================
+   DJ AMBASSADOR FORM STYLING
+================================= */
+#dj-ambassador {
+  padding: 48px 0;
+}
+
+#dj-ambassador h2 {
+  margin: 0 0 8px 0;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--ink);
+}
+
+#dj-ambassador .sub {
+  margin: 0 0 40px 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.ambassador-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 !important;
+}
+
+.ambassador-form label {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 0 24px 0 !important;
+  padding: 0 !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  color: var(--ink) !important;
+}
+
+.ambassador-form input {
+  display: block !important;
+  width: 100% !important;
+  padding: 12px 14px !important;
+  margin: 8px 0 0 0 !important;
+  border: 1px solid rgba(203, 108, 230, 0.3) !important;
+  border-radius: 8px !important;
+  background: var(--card) !important;
+  color: var(--ink) !important;
+  font-size: 1rem !important;
+  font-family: Manrope, sans-serif !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+}
+
+.ambassador-form textarea {
+  display: block !important;
+  width: 100% !important;
+  padding: 12px 14px !important;
+  margin: 8px 0 0 0 !important;
+  border: 1px solid rgba(203, 108, 230, 0.3) !important;
+  border-radius: 8px !important;
+  background: var(--card) !important;
+  color: var(--ink) !important;
+  font-size: 1rem !important;
+  font-family: Manrope, sans-serif !important;
+  min-height: 120px !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+  resize: vertical !important;
+}
+
+.ambassador-form input::placeholder,
+.ambassador-form textarea::placeholder {
+  color: var(--muted) !important;
+  opacity: 0.7 !important;
+}
+
+.ambassador-form input:focus,
+.ambassador-form textarea:focus {
+  outline: none !important;
+  border-color: var(--magenta) !important;
+  box-shadow: 0 0 0 3px rgba(203, 108, 230, 0.15) !important;
+}
+
+.submit-btn {
+  display: inline-block !important;
+  padding: 12px 30px !important;
+  margin: 24px 0 0 0 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: var(--magenta) !important;
+  color: #0b0b0d !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  font-family: Manrope, sans-serif !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 12px rgba(203, 108, 230, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+
+.submit-btn:hover {
+  background: #d98ef0 !important;
+  box-shadow: 0 6px 18px rgba(203, 108, 230, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+.submit-btn:active {
+  transform: translateY(0) !important;
 }
 

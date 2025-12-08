@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DJ Ambassador Program — Cuesic</title>
+  <meta name="description" content="Join the Cuesic DJ Ambassador Program and become part of our growing community." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .form-section {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-family: Manrope, sans-serif;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(203, 108, 230, 0.3);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--ink);
+      font-size: 1rem;
+      font-family: Manrope, sans-serif;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--magenta);
+      box-shadow: 0 0 0 3px rgba(203, 108, 230, 0.15);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      background: var(--magenta);
+      color: #0b0b0d;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: Manrope, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(203, 108, 230, 0.2);
+      transition: all 0.2s ease;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: #d98ef0;
+      box-shadow: 0 6px 18px rgba(203, 108, 230, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimal sticky header -->
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="brand brand-logo" aria-label="Cuesic — Home">
+        <img class="brand-mark" src="assets/fullwhiteTransp.png" alt="Cuesic logo">
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="index.html#socials">Socials</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- DJ AMBASSADOR FORM -->
+  <section id="dj-ambassador" class="section container fade-up">
+    <h2>DJ Ambassador Program</h2>
+    <p class="sub">Apply to join the Cuesic DJ Ambassador Program and bring your sound to our events.</p>
+
+    <div class="form-section">
+      <form id="ambassadorForm" action="https://formspree.io/f/mgvglnal" method="POST">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="djName">DJ Name</label>
+          <input type="text" id="djName" name="djName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="city">City / School</label>
+          <input type="text" id="city" name="city" placeholder="Rutgers – New Brunswick, etc.">
+        </div>
+
+        <div class="form-group">
+          <label for="socials">Main Social Link (Instagram / TikTok)</label>
+          <input type="url" id="socials" name="socials" placeholder="https://instagram.com/yourhandle">
+        </div>
+
+        <div class="form-group">
+          <label for="mixLink">Mix / Set Link</label>
+          <input type="url" id="mixLink" name="mixLink" placeholder="https://soundcloud.com/">
+        </div>
+
+        <div class="form-group">
+          <label for="genres">What genres do you usually play?</label>
+          <input type="text" id="genres" name="genres" placeholder="Tech house, trance, bass, etc.">
+        </div>
+
+        <div class="form-group">
+          <label for="why">Why do you want to be a Cuesic DJ Ambassador?</label>
+          <textarea id="why" name="why"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Apply Now</button>
+      </form>
+
+      <div id="thankyou" style="display:none; text-align:center; margin-top:24px;">
+        <h3 style="font-size:1.25rem; margin-bottom:8px;">Thank you for your submission</h3>
+        <p style="color:var(--muted); margin-bottom:16px;">We received your application and will be in touch.</p>
+        <a href="index.html" class="submit-btn" style="text-decoration:none; display:inline-block;">Go back to Home</a>
+      </div>
+
+      <script>
+        (function(){
+          const form = document.getElementById('ambassadorForm');
+          const thankyou = document.getElementById('thankyou');
+          const submitBtn = form.querySelector('[type="submit"]');
+
+          form.addEventListener('submit', async function(e){
+            e.preventDefault();
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+              const data = new FormData(form);
+              const res = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+              });
+
+              if(res.ok){
+                form.style.display = 'none';
+                // hide the page header text and subtext when showing thank-you
+                const header = document.querySelector('#dj-ambassador h2');
+                if(header) header.style.display = 'none';
+                const sub = document.querySelector('#dj-ambassador .sub');
+                if(sub) sub.style.display = 'none';
+                thankyou.style.display = 'block';
+                // optional: reset form
+                try{ form.reset(); }catch(e){}
+              } else {
+                const json = await res.json().catch(()=>null);
+                const msg = (json && json.error) ? json.error : 'Submission failed. Please try again.';
+                alert(msg);
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+              }
+            } catch(err){
+              console.error(err);
+              alert('Network error — please try again.');
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+            }
+          });
+        })();
+      </script>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Cuesic • Made for the EDM community</p>
+    <p class="footer-links"><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms &amp; Services</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
