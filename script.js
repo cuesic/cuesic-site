@@ -61,6 +61,16 @@ const EVENTS = [
     link: "https://www.flite.city/e/haraz-coffee-house-dj-pop-up-001",
     flyer: "assets/HarazCoffeeFlyer1.png", 
     description: "Cuesic is bringing the energy to Haraz Coffee House for New Brunswick's first ever Coffee Shop DJ Pop-Up!\n\nCome enjoy fresh music, good vibes, and your favorite drinks right here in your own city!\n\nWhy go to NYC or Philly for a Coffee Rave when we are bringing it right to YOU!?!\n\n Grab your <strong class=\"brand-strong\">FREE</strong> ticket and enjoy <strong class=\"brand-strong\">15% off</strong> all your purchases when you show your QR code at checkout!"
+  },
+
+  {
+    title: "Galentine's Day Bites & Beats",
+    date: "2026-02-12T22:00",
+    venue: "Fat Cactus",
+    city: "New Brunswick, NJ",
+    link: "https://flite.city/e/galentines-day-bites-and-beats-001",
+    flyer: "assets/FatCactusFlyerOnline.png", 
+    description: "Cuesic is bringing the energy to Fat Cactus Cantina for a night of great music, great food and great drinks!\n\nCome enjoy fresh music, good vibes, and your favorite Mexican food and drinks right here in your own city!\n\nWhy go to NYC or Philly for an EDM event when we are bringing it right to YOU!?!\n\nGrab your <strong style=\"color: #cb6ce6\">FREE</strong> ticket and enjoy <strong style=\"color: #cb6ce6\">20% off ALL</strong> your purchases when you show your valid RUID at checkout!"
   }
 ];
 
@@ -118,7 +128,9 @@ const modalFlyer = document.getElementById('modal-flyer');
 const modalTicket = document.getElementById('event-ticket');
 
 function openModalFor(idx){
-  const ev = EVENTS[idx];
+  const i = typeof idx === 'string' ? parseInt(idx, 10) : idx;
+  if (isNaN(i) || i < 0 || i >= EVENTS.length) return;
+  const ev = EVENTS[i];
   if(!ev) return;
   modalTitle.textContent = ev.title;
   // render description as HTML so <strong> tags work, and preserve newlines
@@ -126,7 +138,8 @@ function openModalFor(idx){
   modalMeta.textContent = `${formatDate(ev.date)} • ${ev.venue}${ev.city ? ` — ${ev.city}` : ''}`;
   if(ev.flyer){ modalFlyer.src = ev.flyer; modalFlyer.alt = ev.title + ' flyer'; modalFlyer.style.display = 'block'; }
   else { modalFlyer.style.display = 'none'; }
-  if(ev.link){ modalTicket.href = ev.link; modalTicket.style.display = 'inline-block'; }
+  const isPast = !isNaN(new Date(ev.date)) && new Date(ev.date) < new Date();
+  if(ev.link && !isPast){ modalTicket.href = ev.link; modalTicket.style.display = 'inline-block'; }
   else { modalTicket.style.display = 'none'; }
 
   modal.classList.add('active');
@@ -142,9 +155,9 @@ function closeModal(){
 
 // Delegate clicks on details buttons
 document.addEventListener('click', (e)=>{
-  const btn = e.target.closest && e.target.closest('.details-btn');
+  const btn = e.target.closest?.('.details-btn');
   if(btn){ const idx = btn.getAttribute('data-index'); openModalFor(idx); }
-  if(e.target.closest && e.target.closest('[data-close]')){ closeModal(); }
+  if(e.target.closest?.('[data-close]')){ closeModal(); }
 });
 
 // close handlers
