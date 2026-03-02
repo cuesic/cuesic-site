@@ -52,7 +52,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
    - link (optional, string)
 */
 const EVENTS = [
-  // Single event: Pizza Pop Up
   {
     title: "Coffee Shop DJ Pop-Up",
     date: "2025-12-13T13:00",
@@ -71,7 +70,16 @@ const EVENTS = [
     link: "https://flite.city/e/galentines-day-bites-and-beats-001",
     flyer: "assets/FatCactusFlyerOnline.png", 
     description: "Cuesic is bringing the energy to Fat Cactus Cantina for a night of great music, great food and great drinks!\n\nCome enjoy fresh music, good vibes, and your favorite Mexican food and drinks right here in your own city!\n\nWhy go to NYC or Philly for an EDM event when we are bringing it right to YOU!?!\n\nGrab your <strong style=\"color: #cb6ce6\">FREE</strong> ticket and enjoy <strong style=\"color: #cb6ce6\">20% off ALL</strong> your purchases when you show your valid RUID at checkout!"
-  }
+  },
+  {
+    title: "St. Patty's Day Pregame",
+    date: "2026-03-05T20:00",
+    venue: "Fat Cactus",
+    city: "New Brunswick, NJ",
+    link: "https://doorlist.app/e/umPkj0m?s=L53Fb4VZWl",
+    flyer: "assets/STPattiesFlyer.png", 
+    description: "Join Cuesic for a St. Patty’s Day pregame kickoff at Fat Cactus Cantina New Brunswick!\n\nCome enjoy house music, delicious food, and strong drinks in your very own city!\n\nIt’s a Thursday so join us to <strong style=\"color: #cb6ce6\">PREGAME</strong> before you hit the town and sit down for delicious food and drinks!\n\nFREE RSVP and enjoy <strong style=\"color: #cb6ce6\">20% OFF ALL FOOD</strong> when you show your RUID to the server!\n\nWe can’t wait to celebrate St. Patty’s Day with you!"
+  },
 ];
 
 /* Render events into Upcoming / Past */
