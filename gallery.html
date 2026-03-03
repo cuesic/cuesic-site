@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery — Cuesic</title>
+  <meta name="description" content="Browse the Cuesic gallery – flyers, event photos, and moments from our shows." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .gallery-hero {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px auto;
+    }
+
+    .gallery-hero h2 {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .gallery-hero .sub {
+      margin-bottom: 0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .gallery-item {
+      position: relative;
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-item-body {
+      padding: 14px 16px 16px 16px;
+    }
+
+    .gallery-item-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .gallery-item-meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .gallery-item-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      text-align: center;
+      color: var(--ink);
+      background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.1));
+    }
+
+    @media (max-width: 600px) {
+      .gallery-hero {
+        margin-bottom: 28px;
+      }
+      .gallery-item img {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimal sticky header -->
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="brand brand-logo" aria-label="Cuesic — Home">
+        <img class="brand-mark" src="assets/fullwhiteTransp.png" alt="Cuesic logo">
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="index.html#socials">Socials</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- GALLERY -->
+  <section class="section container fade-up">
+    <div class="gallery-hero">
+      <h2>Gallery</h2>
+      <p class="sub">Moments captured from Cuesic shows. More coming soon.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="assets/HarazPic5.jpg" alt="Cuesic St. Patty's Event Flyer">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/HarazPic1.jpg" alt="Cuesic founder Ishan at event">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/HarazPic7.jpg" alt="Cuesic founder Max at event">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/HarazPic4.jpg" alt="Cuesic founder Max at event">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/HarazPic3.jpg" alt="Cuesic founder Max at event">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/HarazPic6.jpg" alt="Cuesic founder Max at event">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/HarazPic8.jpg" alt="Cuesic founder Max at event">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/HarazPic9.jpg" alt="Cuesic founder Max at event">
+        <div class="gallery-item-caption">Haraz Coffee House DJ Pop-up</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Cuesic • Made for the EDM community</p>
+    <p class="footer-links"><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms &amp; Services</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
