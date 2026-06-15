@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Cuesic App — Coming Soon</title>
+  <meta name="description" content="The Cuesic app is coming soon. Discover events, music, and compare your Rave Stats with friends. Join the waitlist." />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ── App Hero ── */
+    .app-hero {
+      min-height: calc(100vh - var(--header-h));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 60px;
+    }
+
+    .app-hero-inner {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .app-hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .app-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--magenta);
+      background: rgba(203, 108, 230, 0.1);
+      border: 1px solid rgba(203, 108, 230, 0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+      width: fit-content;
+    }
+
+    .app-eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--magenta);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    .app-headline {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .app-headline .accent {
+      color: var(--magenta);
+    }
+
+    .app-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .app-tagline {
+      font-size: clamp(1.05rem, 1.7vw, 1.15rem);
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .app-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .btn-waitlist {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: Manrope, sans-serif;
+      cursor: pointer;
+      border: none;
+      background: var(--magenta);
+      color: #0b0b0d;
+      box-shadow: 0 8px 28px rgba(203, 108, 230, 0.35);
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      text-decoration: none;
+    }
+
+    .btn-waitlist:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(203, 108, 230, 0.45);
+      background: #d98ef0;
+    }
+
+    .btn-waitlist svg {
+      flex-shrink: 0;
+    }
+
+    /* ── Mockup Carousel ── */
+    .app-mockups {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .mockup-carousel {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mockup-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mockup-slide {
+      position: absolute;
+      width: 220px;
+      aspect-ratio: 9 / 19.5;
+      border-radius: 32px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.45s cubic-bezier(.4,0,.2,1),
+                  opacity 0.45s cubic-bezier(.4,0,.2,1),
+                  box-shadow 0.45s cubic-bezier(.4,0,.2,1),
+                  filter 0.45s cubic-bezier(.4,0,.2,1);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .mockup-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* Position states */
+    .mockup-slide[data-pos="0"] {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      z-index: 10;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(203,108,230,0.15);
+      filter: none;
+    }
+
+    .mockup-slide[data-pos="1"] {
+      transform: translateX(190px) scale(0.8);
+      opacity: 0.6;
+      z-index: 5;
+      filter: brightness(0.75);
+    }
+
+    .mockup-slide[data-pos="-1"] {
+      transform: translateX(-190px) scale(0.8);
+      opacity: 0.6;
+      z-index: 5;
+      filter: brightness(0.75);
+    }
+
+    .mockup-slide[data-pos="2"],
+    .mockup-slide[data-pos="-2"] {
+      transform: translateX(calc(var(--side) * 320px)) scale(0.65);
+      opacity: 0.25;
+      z-index: 1;
+      filter: brightness(0.5);
+    }
+
+    .mockup-slide[data-pos="2"]  { --side: 1; }
+    .mockup-slide[data-pos="-2"] { --side: -1; }
+
+    /* Dot indicators */
+    .mockup-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .mockup-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .mockup-dot.active {
+      background: var(--magenta);
+      transform: scale(1.3);
+    }
+
+    /* ── Feature Pills ── */
+    .feature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .pill svg {
+      color: var(--magenta);
+      flex-shrink: 0;
+    }
+
+    /* ── Responsive: Tablet ── */
+    @media (max-width: 860px) {
+      .app-hero {
+        padding: 48px 24px 56px;
+        min-height: auto;
+      }
+
+      .app-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+
+      .app-eyebrow {
+        margin: 0 auto;
+      }
+
+      .app-cta-row {
+        justify-content: center;
+      }
+
+      .feature-pills {
+        justify-content: center;
+      }
+
+      .app-mockups {
+        order: -1;
+      }
+
+      .mockup-carousel { height: 400px; }
+      .mockup-slide { width: 170px; }
+      .mockup-slide[data-pos="1"]  { transform: translateX(150px) scale(0.8); }
+      .mockup-slide[data-pos="-1"] { transform: translateX(-150px) scale(0.8); }
+      .mockup-slide[data-pos="2"]  { transform: translateX(260px) scale(0.65); opacity: 0.15; }
+      .mockup-slide[data-pos="-2"] { transform: translateX(-260px) scale(0.65); opacity: 0.15; }
+    }
+
+    /* ── Responsive: Mobile ── */
+    @media (max-width: 540px) {
+      .app-hero {
+        padding: 36px 0 48px;
+      }
+
+      .app-hero-inner {
+        gap: 36px;
+      }
+
+      .app-hero-text {
+        padding: 0 20px;
+        align-items: center;
+      }
+
+      .app-headline {
+        font-size: clamp(1.9rem, 8vw, 2.6rem);
+      }
+
+      .app-sub { font-size: 0.95rem; }
+      .app-tagline { font-size: 1rem; }
+
+      .feature-pills { gap: 8px; }
+
+      .pill {
+        font-size: 0.8rem;
+        padding: 6px 11px;
+      }
+
+      .btn-waitlist {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+      }
+
+      .app-cta-row {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+
+      .app-mockups {
+        width: 100%;
+        align-items: center;
+      }
+
+      .mockup-carousel {
+        height: 360px;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .mockup-track {
+        width: 100%;
+      }
+
+      .mockup-slide { width: 155px; }
+      .mockup-slide[data-pos="1"]  { transform: translateX(126px) scale(0.75); opacity: 0.45; }
+      .mockup-slide[data-pos="-1"] { transform: translateX(-126px) scale(0.75); opacity: 0.45; }
+      .mockup-slide[data-pos="2"]  { opacity: 0; pointer-events: none; }
+      .mockup-slide[data-pos="-2"] { opacity: 0; pointer-events: none; }
+    }
+
+    /* ── Waitlist Modal ── */
+    #waitlist-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+    }
+
+    #waitlist-modal.active {
+      display: block;
+    }
+
+    .waitlist-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+    }
+
+    .waitlist-card {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--card);
+      border: 1px solid rgba(203, 108, 230, 0.2);
+      border-radius: 20px;
+      padding: 36px 32px 32px;
+      width: calc(100% - 40px);
+      max-width: 460px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      z-index: 3001;
+    }
+
+    .waitlist-close {
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      background: rgba(255,255,255,0.92);
+      color: #0b0b0d;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: Manrope, sans-serif;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+
+    .waitlist-card h3 {
+      margin: 0 0 6px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .waitlist-card p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .waitlist-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+      padding: 4px;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 999px;
+      font-family: Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--muted);
+      background: transparent;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    .toggle-btn.active {
+      background: var(--magenta);
+      color: #0b0b0d;
+    }
+
+    .waitlist-input-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .waitlist-input-wrap.active {
+      display: flex;
+    }
+
+    .waitlist-input-wrap input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid rgba(203, 108, 230, 0.3);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      color: var(--ink);
+      font-size: 1rem;
+      font-family: Manrope, sans-serif;
+      box-sizing: border-box;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .waitlist-input-wrap input:focus {
+      outline: none;
+      border-color: var(--magenta);
+      box-shadow: 0 0 0 3px rgba(203, 108, 230, 0.15);
+    }
+
+    .waitlist-input-wrap input::placeholder {
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    .waitlist-submit {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: var(--magenta);
+      color: #0b0b0d;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: Manrope, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(203, 108, 230, 0.25);
+      transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+
+    .waitlist-submit:hover {
+      background: #d98ef0;
+      box-shadow: 0 6px 20px rgba(203, 108, 230, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .waitlist-submit:disabled {
+      opacity: 0.6;
+      cursor: default;
+      transform: none;
+    }
+
+    .waitlist-success {
+      display: none;
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+
+    .waitlist-success.active {
+      display: block;
+    }
+
+    .waitlist-success-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .waitlist-success h4 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      color: var(--ink);
+    }
+
+    .waitlist-success p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      .waitlist-card {
+        padding: 28px 20px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="brand brand-logo" aria-label="Cuesic — Home">
+        <img class="brand-mark" src="assets/fullwhiteTransp.png" alt="Cuesic logo">
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="app.html" style="color:var(--magenta)">App</a></li>
+        <li><a href="index.html#socials">Socials</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="app-hero">
+    <div class="app-hero-inner">
+
+      <div class="app-hero-text fade-up">
+        <div class="app-eyebrow">
+          <span class="app-eyebrow-dot"></span>
+          Coming Soon
+        </div>
+
+        <h1 class="app-headline">
+          Introducing the<br>
+          <span class="accent">Cuesic App</span>
+        </h1>
+
+        <p class="app-tagline">
+          All your rave needs in one place.
+        </p>
+
+        <p class="app-sub">
+          Discover events, explore music, and compare your Rave Stats with friends —
+          the one place built for the EDM community.
+        </p>
+
+        <div class="feature-pills">
+          <span class="pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Discover Events
+          </span>
+          <span class="pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            Explore Music
+          </span>
+          <span class="pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Rave Stats
+          </span>
+          <span class="pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            EDM Community
+          </span>
+        </div>
+
+        <div class="app-cta-row">
+          <button class="btn-waitlist" id="open-waitlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Join the Waitlist
+          </button>
+        </div>
+      </div>
+
+      <div class="app-mockups fade-up">
+        <div class="mockup-carousel">
+          <div class="mockup-track" id="mockup-track">
+            <div class="mockup-slide" data-index="0" data-pos="0">
+              <img src="assets/Mockup1.png" alt="Cuesic app screen 1" draggable="false" />
+            </div>
+            <div class="mockup-slide" data-index="1" data-pos="1">
+              <img src="assets/Mockup2.png" alt="Cuesic app screen 2" draggable="false" />
+            </div>
+            <div class="mockup-slide" data-index="2" data-pos="2">
+              <img src="assets/Mockup3.png" alt="Cuesic app screen 3" draggable="false" />
+            </div>
+            <div class="mockup-slide" data-index="3" data-pos="-1">
+              <img src="assets/Mockup4.png" alt="Cuesic app screen 4" draggable="false" />
+            </div>
+          </div>
+        </div>
+        <div class="mockup-dots" id="mockup-dots">
+          <button class="mockup-dot active" data-i="0" aria-label="Screen 1"></button>
+          <button class="mockup-dot" data-i="1" aria-label="Screen 2"></button>
+          <button class="mockup-dot" data-i="2" aria-label="Screen 3"></button>
+          <button class="mockup-dot" data-i="3" aria-label="Screen 4"></button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Cuesic • Made for the EDM community</p>
+    <p class="footer-links"><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms &amp; Services</a></p>
+  </footer>
+
+  <!-- WAITLIST MODAL -->
+  <div id="waitlist-modal" aria-hidden="true">
+    <div class="waitlist-overlay" id="waitlist-overlay"></div>
+    <div class="waitlist-card" role="dialog" aria-modal="true" aria-labelledby="waitlist-title">
+      <button class="waitlist-close" id="waitlist-close" aria-label="Close">Close</button>
+
+      <div id="waitlist-form-wrap">
+        <h3 id="waitlist-title">Join the Waitlist</h3>
+        <p>Be the first to know when the Cuesic app drops. Drop your email or phone — your choice.</p>
+
+        <div class="waitlist-toggle">
+          <button class="toggle-btn active" data-type="email">Email</button>
+          <button class="toggle-btn" data-type="phone">Phone</button>
+        </div>
+
+        <form id="waitlist-email-wrap" class="waitlist-input-wrap active" action="https://formspree.io/f/xykaobvo" method="POST">
+          <input type="hidden" name="_type" value="waitlist-email">
+          <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+          <button type="submit" class="waitlist-submit">Notify Me</button>
+        </form>
+
+        <form id="waitlist-phone-wrap" class="waitlist-input-wrap" action="https://formspree.io/f/xykaobvo" method="POST">
+          <input type="hidden" name="_type" value="waitlist-phone">
+          <input type="tel" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+          <button type="submit" class="waitlist-submit">Notify Me</button>
+        </form>
+      </div>
+
+      <div class="waitlist-success" id="waitlist-success">
+        <div class="waitlist-success-icon">🎉</div>
+        <h4>You're on the list!</h4>
+        <p>We'll hit you up the moment the Cuesic app is ready.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // ── Mockup Carousel ──
+    const TOTAL = 4;
+    let current = 0;
+
+    const slides = Array.from(document.querySelectorAll('.mockup-slide'));
+    const dots   = Array.from(document.querySelectorAll('.mockup-dot'));
+
+    function posFor(index) {
+      let diff = ((index - current) % TOTAL + TOTAL) % TOTAL;
+      if (diff > TOTAL / 2) diff -= TOTAL;
+      return diff;
+    }
+
+    function goTo(n) {
+      current = ((n % TOTAL) + TOTAL) % TOTAL;
+      slides.forEach((s, i) => {
+        const p = posFor(i);
+        s.setAttribute('data-pos', Math.max(-2, Math.min(2, p)));
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    // Click a side card to bring it forward
+    slides.forEach((s, i) => {
+      s.addEventListener('click', () => { if (i !== current) goTo(i); });
+    });
+
+    // Dot nav
+    dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
+
+    // Touch / drag swipe
+    let startX = 0;
+    const track = document.getElementById('mockup-track');
+    track.addEventListener('pointerdown', e => { startX = e.clientX; });
+    track.addEventListener('pointerup',   e => {
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+    });
+
+    goTo(0);
+  </script>
+  <script>
+    // Waitlist modal open / close
+    const waitlistModal = document.getElementById('waitlist-modal');
+    const openBtn = document.getElementById('open-waitlist');
+    const closeBtn = document.getElementById('waitlist-close');
+    const overlay = document.getElementById('waitlist-overlay');
+
+    function openWaitlist() {
+      waitlistModal.classList.add('active');
+      waitlistModal.setAttribute('aria-hidden', 'false');
+      closeBtn.focus();
+    }
+
+    function closeWaitlist() {
+      waitlistModal.classList.remove('active');
+      waitlistModal.setAttribute('aria-hidden', 'true');
+    }
+
+    openBtn.addEventListener('click', openWaitlist);
+    closeBtn.addEventListener('click', closeWaitlist);
+    overlay.addEventListener('click', closeWaitlist);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWaitlist(); });
+
+    // Toggle email / phone
+    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    const emailWrap = document.getElementById('waitlist-email-wrap');
+    const phoneWrap = document.getElementById('waitlist-phone-wrap');
+
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggleBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (btn.dataset.type === 'email') {
+          emailWrap.classList.add('active');
+          phoneWrap.classList.remove('active');
+        } else {
+          phoneWrap.classList.add('active');
+          emailWrap.classList.remove('active');
+        }
+      });
+    });
+
+    // Form submissions
+    async function handleWaitlistSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('.waitlist-submit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          document.getElementById('waitlist-form-wrap').style.display = 'none';
+          document.getElementById('waitlist-success').classList.add('active');
+        } else {
+          alert('Something went wrong — please try again.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Notify Me';
+        }
+      } catch {
+        alert('Network error — please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Notify Me';
+      }
+    }
+
+    emailWrap.addEventListener('submit', handleWaitlistSubmit);
+    phoneWrap.addEventListener('submit', handleWaitlistSubmit);
+  </script>
+</body>
+</html>

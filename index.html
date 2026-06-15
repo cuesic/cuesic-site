@@ -12,8 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- TikTok embed script (for previews below) -->
-  <script async src="https://www.tiktok.com/embed.js"></script>
 </head>
 <body>
 
@@ -27,6 +25,7 @@
         <span class="hamburger"></span>
       </button>
       <ul class="nav-menu">
+        <li><a href="app.html" style="color:var(--magenta)">App</a></li>
         <li><a href="#socials">Socials</a></li>
         <li><a href="#events">Events</a></li>
         <li><a href="gallery.html">Gallery</a></li>
@@ -42,7 +41,7 @@
       <h1 class="tagline">EDM News • Promotion • Events</h1>
       <div class="cta-group">
         <a class="cta" href="#events">Check Our Events</a>
-        <a class="cta" href="ambassador.html">DJ Ambassador Program</a>
+        <a class="cta cta-outline" href="app.html">Get the App</a>
       </div>
     </div>
     <!-- ambient glow -->
@@ -67,10 +66,7 @@
       </a>
     </div>
 
-    <h3 class="tiktok-title">Latest on TikTok</h3>
-    <div class="tiktoks" id="tiktok-thumbnails">
-      <!-- Thumbnails will be loaded here by script.js -->
-    </div>
+    <div class="social-posts" id="social-posts"></div>
   </section>
 
   <!-- EVENTS -->
@@ -163,38 +159,70 @@
 
   <script src="script.js"></script>
   <script>
-    // TikTok video URLs
-    const tiktokVideos = [
-      "https://www.tiktok.com/@cuesic/video/7510320421640883502",
-      "https://www.tiktok.com/@cuesic/video/7516755875948809485",
-  "https://www.tiktok.com/@cuesic/video/7535297874532273421"
+    const POSTS = [
+      {
+        url: "https://www.tiktok.com/@cuesic/video/7633561798083431694",
+        platform: "tiktok",
+        oEmbed: "https://www.tiktok.com/oembed?url="
+      },
+      {
+        url: "https://www.tiktok.com/@cuesic/video/7535297874532273421",
+        platform: "tiktok",
+        oEmbed: "https://www.tiktok.com/oembed?url="
+      },
+      {
+        url: "https://www.tiktok.com/@cuesic/photo/7644983869267135757",
+        platform: "tiktok",
+        oEmbed: "https://www.tiktok.com/oembed?url="
+      }
     ];
 
-    const tiktokContainer = document.getElementById('tiktok-thumbnails');
-    tiktokContainer.innerHTML = '';
+    const container = document.getElementById('social-posts');
 
-    tiktokVideos.forEach(url => {
-      fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`)
-        .then(r => r.json())
-        .then(data => {
-          const thumb = document.createElement('a');
-          thumb.href = url;
-          thumb.target = '_blank';
-          thumb.rel = 'noopener';
-          thumb.className = 'tiktok-thumb';
-          thumb.innerHTML = `
-            <img src="${data.thumbnail_url}" alt="TikTok video thumbnail" />
-            <span class="tiktok-play">▶</span>
-          `;
-          tiktokContainer.appendChild(thumb);
-        });
+    const igIcon = `<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1.3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>`;
+    const ttIcon = `<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M21 8.5a7.5 7.5 0 0 1-5-2v7.6a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v2.7a2.9 2.9 0 1 0 2.1 2.8V2h2.6a5 5 0 0 0 5 5v1.5Z"/></svg>`;
+
+    function makeCard(thumbUrl, post) {
+      const a = document.createElement('a');
+      a.href = post.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'post-card';
+
+      if (thumbUrl) {
+        a.innerHTML = `
+          <img src="${thumbUrl}" alt="Post thumbnail" />
+          <span class="post-play">▶</span>
+          <span class="post-platform-icon">${post.platform === 'instagram' ? igIcon : ttIcon}</span>
+        `;
+      } else {
+        a.innerHTML = `
+          <div class="post-fallback post-fallback--${post.platform}">
+            ${post.platform === 'instagram' ? igIcon : ttIcon}
+            <span>View on ${post.platform === 'instagram' ? 'Instagram' : 'TikTok'}</span>
+          </div>
+          <span class="post-play">▶</span>
+        `;
+      }
+      container.appendChild(a);
+    }
+
+    POSTS.forEach(post => {
+      if (post.oEmbed) {
+        fetch(post.oEmbed + encodeURIComponent(post.url))
+          .then(r => r.json())
+          .then(data => makeCard(data.thumbnail_url, post))
+          .catch(() => makeCard(null, post));
+      } else {
+        makeCard(null, post);
+      }
     });
   </script>
-    <!-- Klaviyo Popup Script -->
-    <script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/TJ6bND/klaviyo.js?company_id=TJ6bND'></script>
-    <script type="text/javascript"> 
+    <!-- Klaviyo Popup Script (disabled) -->
+    <!-- <script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/TJ6bND/klaviyo.js?company_id=TJ6bND'></script>
+    <script type="text/javascript">
     //Initialize Klaviyo object on page load
-    !function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); 
-    </script>
+    !function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();
+    </script> -->
   </body>
   </html>
