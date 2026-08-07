@@ -297,6 +297,93 @@
       .mockup-slide[data-pos="-2"] { opacity: 0; pointer-events: none; }
       .waitlist-card { padding: 28px 20px 24px; }
     }
+
+    /* ── Org Tree ── */
+    .org-tree { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+    .org-root-node {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+    .org-root-logo { height: 64px; display: block; }
+    .org-trunk { width: 2px; height: 36px; background: rgba(203,108,230,0.35); }
+    .org-children {
+      display: flex;
+      gap: 24px;
+      position: relative;
+      justify-content: center;
+    }
+    .org-children::before {
+      content: '';
+      position: absolute;
+      top: 0; left: calc(50%/3 + 8px); right: calc(50%/3 + 8px);
+      height: 2px;
+      background: rgba(203,108,230,0.35);
+    }
+    .org-child { display: flex; flex-direction: column; align-items: center; }
+    .org-child-stem { width: 2px; height: 28px; background: rgba(203,108,230,0.35); }
+    .org-card {
+      display: flex; flex-direction: column; gap: 10px;
+      padding: 24px 22px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      text-decoration: none;
+      color: var(--ink);
+      max-width: 240px;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .org-card:hover {
+      border-color: var(--magenta);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(203,108,230,0.18);
+    }
+    .org-card-icon {
+      width: 40px; height: 40px;
+      background: rgba(203,108,230,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--magenta);
+    }
+    .org-card-label {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--magenta);
+    }
+    .org-card h3 { margin: 0; font-size: 1rem; font-weight: 800; }
+    .org-card p { margin: 0; font-size: 0.875rem; color: var(--muted); line-height: 1.5; }
+    .org-card-cta { font-size: 0.85rem; font-weight: 700; color: var(--magenta); margin-top: 4px; }
+
+    /* ── About Grid ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .about-item {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 28px 24px;
+    }
+    .about-item-icon {
+      width: 40px; height: 40px;
+      background: rgba(203,108,230,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--magenta);
+      margin-bottom: 16px;
+    }
+    .about-item h3 { margin: 0 0 10px; font-size: 1.05rem; font-weight: 800; }
+    .about-item p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+
+    @media (max-width: 860px) {
+      .org-children { flex-direction: column; align-items: center; gap: 0; }
+      .org-children::before { display: none; }
+      .org-card { max-width: 320px; width: 100%; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -311,11 +398,9 @@
         <span class="hamburger"></span>
       </button>
       <ul class="nav-menu">
-        <li><a href="#home" style="color:var(--magenta)">App</a></li>
-        <li><a href="#socials">Socials</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="app.html">App</a></li>
+        <li><a href="entertainment.html">Entertainment</a></li>
+        <li><a href="av.html">AV</a></li>
       </ul>
     </nav>
   </header>
@@ -366,7 +451,6 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Join the Waitlist
           </button>
-          <a class="cta cta-outline" href="#events">See Events</a>
         </div>
       </div>
 
@@ -398,40 +482,82 @@
     </div>
   </section>
 
-  <!-- SOCIALS + TIKTOK PREVIEWS -->
-  <section id="socials" class="section container fade-up">
-    <h2>Follow Cuesic</h2>
-    <p class="sub">Tap in with the brand across platforms.</p>
+  <!-- ORG TREE -->
+  <section id="companies" class="section container fade-up">
+    <h2 style="text-align:center">The Cuesic Family</h2>
+    <p class="sub" style="text-align:center">Three subsidiaries. One mission — transforming how people experience music and events.</p>
 
-    <div class="socials">
-      <a class="social" href="https://www.tiktok.com/@cuesic" target="_blank" rel="noopener" aria-label="TikTok">
-        <!-- TikTok SVG -->
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.5a7.5 7.5 0 0 1-5-2v7.6a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v2.7a2.9 2.9 0 1 0 2.1 2.8V2h2.6a5 5 0 0 0 5 5v1.5Z"/></svg>
-        TikTok
-      </a>
-      <a class="social" href="https://www.instagram.com/cuesicmusic" target="_blank" rel="noopener" aria-label="Instagram">
-        <!-- IG SVG -->
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1.3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
-        Instagram
-      </a>
+    <div class="org-tree">
+      <div class="org-root-node">
+        <img src="assets/trimmedCuesicTransp.png" alt="Cuesic" class="org-root-logo">
+      </div>
+      <div class="org-trunk"></div>
+      <div class="org-children">
+        <div class="org-child">
+          <div class="org-child-stem"></div>
+          <a href="app.html" class="org-card">
+            <div class="org-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+            </div>
+            <span class="org-card-label">App</span>
+            <h3>Cuesic App</h3>
+            <p>Discover events, explore music, and compare Rave Stats with friends.</p>
+            <span class="org-card-cta">Learn More →</span>
+          </a>
+        </div>
+        <div class="org-child">
+          <div class="org-child-stem"></div>
+          <a href="entertainment.html" class="org-card org-card--ent">
+            <div class="org-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </div>
+            <span class="org-card-label">Entertainment</span>
+            <h3>Cuesic Entertainment</h3>
+            <p>EDM events, promotion, and live experiences brought to your city.</p>
+            <span class="org-card-cta">Learn More →</span>
+          </a>
+        </div>
+        <div class="org-child">
+          <div class="org-child-stem"></div>
+          <a href="av.html" class="org-card org-card--av">
+            <div class="org-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </div>
+            <span class="org-card-label">AV</span>
+            <h3>Cuesic AV</h3>
+            <p>Custom audio and visual solutions for homes, bars, venues, and events.</p>
+            <span class="org-card-cta">Learn More →</span>
+          </a>
+        </div>
+      </div>
     </div>
-
-    <div class="social-posts" id="social-posts"></div>
   </section>
 
-  <!-- EVENTS -->
-  <section id="events" class="section container fade-up">
-    <h2>Events</h2>
-    <p class="sub">Catch upcoming shows or browse what we’ve done.</p>
-
-    <div class="events-grid">
-      <div class="events-col">
-        <h3>Upcoming</h3>
-        <div id="upcoming" class="cards"></div>
+  <!-- ABOUT -->
+  <section id="about" class="section container fade-up">
+    <h2>About Cuesic</h2>
+    <p class="sub">Building the future of EDM culture — one city at a time.</p>
+    <div class="about-grid">
+      <div class="about-item">
+        <div class="about-item-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Our Mission</h3>
+        <p>Cuesic exists to solve the biggest problems facing EDM fans — from discovering what’s happening locally, to experiencing it live, to the technology that powers it all.</p>
       </div>
-      <div class="events-col">
-        <h3>Past</h3>
-        <div id="past" class="cards"></div>
+      <div class="about-item">
+        <div class="about-item-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>What We Do</h3>
+        <p>We build technology, produce events, and deliver professional AV services — all under one brand, all in service of the music community.</p>
+      </div>
+      <div class="about-item">
+        <div class="about-item-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+        </div>
+        <h3>Where We’re Headed</h3>
+        <p>Starting in New Brunswick and expanding nationwide, Cuesic is redefining how people connect with electronic music and the culture around it.</p>
       </div>
     </div>
   </section>
@@ -441,42 +567,12 @@
     <h2>Meet the Founders</h2>
     <div class="founders-grid">
       <div class="founder">
-        <img src="assets/ishanBansal.jpg" alt="Founder IB" class="founder-img" />
+        <img src="assets/ishanBansal.jpg" alt="Ishan Bansal" class="founder-img" />
         <div class="founder-name">Ishan Bansal</div>
       </div>
       <div class="founder">
-        <img src="assets/maxZhang.jpg" alt="Founder MZ" class="founder-img" />
+        <img src="assets/maxZhang.jpg" alt="Max Zhang" class="founder-img" />
         <div class="founder-name">Max Zhang</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="section container fade-up">
-    <h2>Contact</h2>
-    <p class="sub">For bookings, promos, and partnerships.</p>
-    <div class="contact-card">
-      <div>
-        <h4>Email</h4>
-        <a class="email" href="mailto:cuesicentertainment@gmail.com">cuesicentertainment@gmail.com</a>
-      </div>
-      <div>
-        <h4>Socials</h4>
-        <div class="contact-socials">
-          <a class="contact-social-btn" href="https://www.tiktok.com/@cuesic" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M21 8.5a7.5 7.5 0 0 1-5-2v7.6a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v2.7a2.9 2.9 0 1 0 2.1 2.8V2h2.6a5 5 0 0 0 5 5v1.5Z"/></svg>
-            TikTok
-          </a>
-          <a class="contact-social-btn" href="https://www.instagram.com/cuesicmusic" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1.3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
-            Instagram
-          </a>
-          <a class="contact-social-btn" href="https://www.linkedin.com/company/cuesic-entertainment/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-        </div>
-        <p style="margin-top:10px;">DMs open on TikTok &amp; Instagram.</p>
       </div>
     </div>
   </section>
