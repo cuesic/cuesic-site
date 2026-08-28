@@ -16,7 +16,32 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Opening Cuesic…</title>
+<title>Cuesic — Your EDM Home Base</title>
+
+<!--
+  Open Graph tags build the rich preview card in iMessage, WhatsApp, Slack and
+  the rest. They must be present in the HTML as served: link crawlers do not run
+  JavaScript, so this page cannot look the event up and describe it. That is why
+  the card is generic Cuesic branding rather than the shared event's own name and
+  poster — per-event previews would need a host that renders server-side.
+
+  og:image must be an absolute URL. A relative path silently produces a card with
+  no thumbnail, which is the usual reason these look broken.
+-->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Cuesic" />
+<meta property="og:title" content="Cuesic — Your EDM Home Base" />
+<meta property="og:description" content="Discover EDM shows and festivals, see which friends are going, and keep track of every set you catch." />
+<meta property="og:url" content="https://cuesic.com/e/" />
+<meta property="og:image" content="https://cuesic.com/assets/OG_Image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Cuesic — Your EDM Home Base" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Cuesic — Your EDM Home Base" />
+<meta name="twitter:description" content="Discover EDM shows and festivals, see which friends are going, and keep track of every set you catch." />
+<meta name="twitter:image" content="https://cuesic.com/assets/OG_Image.png" />
 <style>
   html, body {
     height: 100%;
