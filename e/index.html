@@ -1,0 +1,78 @@
+<!doctype html>
+<!--
+  Cuesic shared-event bounce page.
+
+  Deploy: copy this file to /e/index.html in the repo that serves cuesic.com (GitHub
+  Pages), so it is reachable at https://cuesic.com/e/. Shared links look like
+  https://cuesic.com/e/?id=<eventId> — the query-string form is used because GitHub
+  Pages is static with no rewrite rules, so a path like /e/<eventId> would 404 (and a
+  404 also breaks the iMessage link preview).
+
+  If cuesic.com later moves to a host with rewrites (Netlify, Cloudflare Pages, Vercel),
+  route /e/* to this file and the prettier /e/<eventId> form can be used instead — the
+  script below already reads an id from the path as a fallback.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Opening Cuesic…</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+  h1 { font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.2px; }
+  p { font-size: 14px; margin: 0; color: rgba(255, 255, 255, 0.6); }
+  a { color: #9b6bff; font-size: 14px; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Opening Cuesic…</h1>
+  <p>Taking you to this event.</p>
+  <a id="fallback" href="https://cuesic.com">Continue to cuesic.com</a>
+</main>
+<script>
+  // Where people land when the app doesn't open (not installed, or desktop).
+  // Swap this for the App Store URL once Cuesic is publicly listed.
+  var FALLBACK_URL = "https://cuesic.com";
+
+  // Event id: ?id=<eventId> is the canonical form; a trailing path segment
+  // (/e/<eventId>) is tolerated in case the site moves to a host with rewrites.
+  var params = new URLSearchParams(window.location.search);
+  var eventId = params.get("id");
+  if (!eventId) {
+    var segments = window.location.pathname.split("/").filter(Boolean);
+    var last = segments[segments.length - 1];
+    if (last && last !== "e" && last !== "index.html") eventId = last;
+  }
+
+  document.getElementById("fallback").href = FALLBACK_URL;
+
+  if (eventId) {
+    window.location.href = "ravehub://event?id=" + encodeURIComponent(eventId);
+    // If the app took over, this tab is backgrounded and the timer never fires.
+    setTimeout(function () {
+      if (!document.hidden) window.location.replace(FALLBACK_URL);
+    }, 1500);
+  } else {
+    window.location.replace(FALLBACK_URL);
+  }
+</script>
+</body>
+</html>
