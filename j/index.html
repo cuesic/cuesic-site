@@ -1,0 +1,131 @@
+<!doctype html>
+<!--
+  Cuesic referral invite page.
+
+  Deploy: copy this file to /j/index.html on the site that serves cuesic.com, so it
+  is reachable at https://cuesic.com/j/. Referral links look like
+  https://cuesic.com/j/?code=<username> (query string: cuesic.com is static, with no
+  rewrite rules, so /j/<code> would 404 and break the link preview).
+
+  What it does:
+  - iMessage, WhatsApp and the rest build their preview card from the Open Graph tags
+    below. Link crawlers don't run JavaScript, so the card is the same for every
+    invite; the code is in the message text and on this page.
+  - It shows the code big, with a copy button. "Open Cuesic" opens
+    ravehub://join?code=<code>, which starts sign-up with the code filled in
+    (App.tsx); "Get the app" is for people without it, since the code can't carry
+    through an install.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>You're invited to Cuesic</title>
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Cuesic" />
+<meta property="og:title" content="You're invited to Cuesic" />
+<meta property="og:description" content="Find EDM shows and festivals, see which friends are going, and track every set you catch. Tap to join with your friend's code." />
+<meta property="og:url" content="https://cuesic.com/j/" />
+<meta property="og:image" content="https://cuesic.com/assets/OG_Image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Cuesic, your EDM home base" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="You're invited to Cuesic" />
+<meta name="twitter:description" content="Find EDM shows and festivals, see which friends are going, and track every set you catch." />
+<meta name="twitter:image" content="https://cuesic.com/assets/OG_Image.png" />
+<meta name="theme-color" content="#000000" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --purple: #9b6bff; --muted: rgba(255, 255, 255, 0.62); --card: #121214; --line: rgba(255, 255, 255, 0.1); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #000; color: #fff; font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(24px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+    background:
+      radial-gradient(120% 70% at 50% 0%, rgba(155, 107, 255, 0.28), transparent 60%),
+      #000;
+  }
+  main { width: 100%; max-width: 380px; text-align: center; }
+  .logo { width: 132px; height: 132px; object-fit: contain; margin: 0 auto 4px; display: block; }
+  h1 { font-size: 28px; line-height: 1.15; font-weight: 800; letter-spacing: -0.5px; margin: 0 0 10px; }
+  .lede { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 0 0 26px; }
+  .code-card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 18px 18px 16px; margin-bottom: 18px; }
+  .code-label { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  .code { font-size: 30px; font-weight: 800; letter-spacing: 0.5px; word-break: break-all; margin: 0 0 12px; }
+  .copy { appearance: none; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.06); color: #fff; font: 600 14px Manrope, sans-serif; border-radius: 12px; padding: 10px 16px; min-height: 44px; cursor: pointer; }
+  .copy:active { opacity: 0.8; }
+  .btn { display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 16px; font-size: 16px; font-weight: 800; text-decoration: none; margin-bottom: 10px; }
+  .btn-primary { background: var(--purple); color: #fff; }
+  .btn-secondary { background: transparent; color: var(--purple); border: 1px solid rgba(155, 107, 255, 0.45); }
+  .hint { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 14px 0 0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="https://cuesic.com/assets/fullwhiteTransp.png" alt="Cuesic" width="132" height="132" />
+  <h1 id="title">You're invited to Cuesic</h1>
+  <p class="lede">Find EDM shows and festivals, see which friends are going, and track every set you catch.</p>
+
+  <section class="code-card" id="code-card" hidden>
+    <p class="code-label">Your invite code</p>
+    <p class="code" id="code"></p>
+    <button class="copy" id="copy" type="button">Copy code</button>
+  </section>
+
+  <a class="btn btn-primary" id="open" href="#">Open Cuesic</a>
+  <a class="btn btn-secondary" id="get" href="#">Get the app</a>
+  <p class="hint" id="hint" hidden>New to Cuesic? Get the app, then enter this code when you sign up.</p>
+</main>
+<script>
+  // Where "Get the app" goes. Cuesic isn't publicly listed yet, so this is the app
+  // page on cuesic.com. At launch, change it to https://apps.apple.com/app/id6783059635
+  var GET_APP_URL = "https://cuesic.com/app.html";
+
+  // Usernames are a-z, 0-9 and _ (the app enforces it), so anything else is dropped.
+  var params = new URLSearchParams(window.location.search);
+  var code = (params.get("code") || "").toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 24);
+
+  var getLink = document.getElementById("get");
+  getLink.href = GET_APP_URL;
+
+  var openLink = document.getElementById("open");
+  var appUrl = code ? "ravehub://join?code=" + encodeURIComponent(code) : "ravehub://";
+  openLink.href = appUrl;
+
+  if (code) {
+    document.getElementById("code").textContent = code;
+    document.getElementById("code-card").hidden = false;
+    document.getElementById("hint").hidden = false;
+    document.getElementById("title").textContent = "@" + code + " invited you to Cuesic";
+    document.title = "@" + code + " invited you to Cuesic";
+
+    var copyBtn = document.getElementById("copy");
+    copyBtn.addEventListener("click", function () {
+      var done = function () {
+        copyBtn.textContent = "Copied";
+        setTimeout(function () { copyBtn.textContent = "Copy code"; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done, function () { window.prompt("Copy your code:", code); });
+      } else {
+        window.prompt("Copy your code:", code);
+      }
+    });
+  }
+
+  // No automatic jump into the app: when Cuesic isn't installed, Safari answers a
+  // ravehub:// redirect with an "address is invalid" alert, which is a poor first
+  // impression for an invite. "Open Cuesic" does it on a tap instead.
+</script>
+</body>
+</html>
