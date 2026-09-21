@@ -191,7 +191,7 @@
     .mockup-slide[data-pos="0"] {
       transform: translateX(0) scale(1);
       opacity: 1; z-index: 10;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(203,108,230,0.15);
+      box-shadow: 0 0 60px rgba(203,108,230,0.15);
       filter: none;
     }
     .mockup-slide[data-pos="1"]  { transform: translateX(190px) scale(0.8); opacity: 0.6; z-index: 5; filter: brightness(0.75); }
@@ -296,7 +296,7 @@
     .journey-step h3 { margin: 10px 0 12px; font-size: clamp(1.65rem, 3vw, 2.35rem); }
     .journey-step p { margin: 0; color: var(--muted); font-size: 1.02rem; line-height: 1.7; }
     .journey-phone { position: sticky; top: 110px; padding-top: 6vh; }
-    .journey-phone-frame { position: relative; width: min(100%, 292px); aspect-ratio: 9 / 19.5; margin: 0 auto; overflow: hidden; border-radius: 40px; background: #050507; box-shadow: 0 30px 90px rgba(0,0,0,0.62), 0 0 65px rgba(203,108,230,0.19); }
+    .journey-phone-frame { position: relative; width: min(100%, 292px); aspect-ratio: 9 / 19.5; margin: 0 auto; overflow: hidden; border-radius: 40px; background: #050507; box-shadow: 0 0 65px rgba(203,108,230,0.19); }
     .journey-screen { position: absolute; inset: 0; opacity: 0; transform: scale(1.035); transition: opacity 0.45s ease, transform 0.65s ease; }
     .journey-screen.active { opacity: 1; transform: scale(1); }
     .journey-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -446,6 +446,7 @@
         <span class="hamburger"></span>
       </button>
       <ul class="nav-menu">
+        <li><a href="index.html" style="color:var(--magenta)">Home</a></li>
         <li><a href="app.html">App</a></li>
         <li><a href="entertainment.html">Entertainment</a></li>
         <li><a href="av.html">AV</a></li>
@@ -844,6 +845,23 @@
     document.querySelectorAll('[data-app-store-link][aria-disabled="true"]').forEach(link => {
       link.addEventListener('click', event => event.preventDefault());
     });
+
+    // Add ?launch-preview=1 to see the post-launch layout without the waitlist.
+    if (new URLSearchParams(window.location.search).has('launch-preview')) {
+      document.querySelectorAll('#waitlist-modal, [data-launch-waitlist]').forEach(element => { element.hidden = true; });
+      document.querySelectorAll('#open-waitlist').forEach(element => { element.hidden = true; });
+      document.querySelectorAll('[data-app-store-link]').forEach(link => {
+        link.removeAttribute('aria-disabled');
+        link.href = '#app-store-preview';
+      });
+      document.querySelectorAll('.app-eyebrow, .sub-eyebrow').forEach(label => {
+        const dot = label.querySelector('span');
+        label.textContent = '';
+        if (dot) label.appendChild(dot);
+        label.append('Now available');
+      });
+      document.querySelectorAll('[data-app-store-link] small').forEach(label => { label.textContent = 'Download now'; });
+    }
   </script>
   <script>
     const POSTS = [
