@@ -249,10 +249,9 @@
     <p class="sub">One app for discovering events, exploring music, and tracking your rave journey — built by ravers, for the community.</p>
   </div>
 
-  <!-- Replace the placeholder href with the live App Store listing URL. -->
-  <div class="launch-download fade-up">
+    <div class="launch-download fade-up">
     <p>Download Cuesic on the App Store.</p>
-    <a class="app-store-link" href="#" data-app-store-link>
+    <a class="app-store-link" href="https://apps.apple.com/app/id6783059635" data-app-store-link>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
       <span>Download on the App Store</span>
     </a>
@@ -483,23 +482,6 @@
       link.addEventListener('click', event => event.preventDefault());
     });
 
-    // Add ?launch-preview=1 to see the post-launch layout without the waitlist.
-    if (new URLSearchParams(window.location.search).has('launch-preview')) {
-      document.querySelectorAll('[data-launch-waitlist]').forEach(element => { element.hidden = true; });
-      const launchMessage = document.querySelector('.launch-download p');
-      if (launchMessage) launchMessage.textContent = 'Download Cuesic on the App Store.';
-      document.querySelectorAll('[data-app-store-link]').forEach(link => {
-        link.removeAttribute('aria-disabled');
-        link.href = '#app-store-preview';
-      });
-      document.querySelectorAll('.app-eyebrow, .sub-eyebrow').forEach(label => {
-        const dot = label.querySelector('span');
-        label.textContent = '';
-        if (dot) label.appendChild(dot);
-        label.append('Now available');
-      });
-      document.querySelectorAll('[data-app-store-link] small').forEach(label => { label.textContent = 'Download now'; });
-    }
   </script>
 </body>
 </html>
