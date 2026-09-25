@@ -41,51 +41,6 @@
     .page-header h1 .accent { color: var(--magenta); }
     .page-header .sub { font-size: clamp(1rem, 2vw, 1.15rem); margin: 0; }
 
-    /* ── Waitlist (inline, top of page) ── */
-    .waitlist-inline {
-      max-width: 560px;
-      margin: 0 auto 80px;
-      padding: 0 24px;
-      text-align: center;
-    }
-    .waitlist-toggle {
-      display: flex; gap: 6px; margin: 0 auto 16px;
-      background: rgba(255,255,255,0.05); border-radius: 999px; padding: 4px;
-      max-width: 260px;
-    }
-    .toggle-btn {
-      flex: 1; padding: 8px; border: none; border-radius: 999px;
-      font-family: Manrope, sans-serif; font-weight: 700; font-size: 0.9rem;
-      cursor: pointer; color: var(--muted); background: transparent;
-      transition: background 0.18s, color 0.18s;
-    }
-    .toggle-btn.active { background: var(--magenta); color: #0b0b0d; }
-    .waitlist-input-wrap { display: none; flex-direction: row; gap: 10px; align-items: stretch; }
-    .waitlist-input-wrap.active { display: flex; }
-    .waitlist-input-wrap input {
-      flex: 1; padding: 13px 16px;
-      border: 1px solid rgba(203,108,230,0.3); border-radius: 999px;
-      background: rgba(255,255,255,0.04); color: var(--ink); font-size: 1rem;
-      font-family: Manrope, sans-serif;
-      transition: border-color 0.18s, box-shadow 0.18s;
-    }
-    .waitlist-input-wrap input:focus { outline: none; border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(203,108,230,0.15); }
-    .waitlist-input-wrap input::placeholder { color: var(--muted); opacity: 0.7; }
-    .waitlist-submit {
-      padding: 13px 24px; border: none; border-radius: 999px;
-      background: var(--magenta); color: #0b0b0d;
-      font-weight: 700; font-size: 1rem; font-family: Manrope, sans-serif; cursor: pointer;
-      white-space: nowrap;
-      box-shadow: 0 4px 14px rgba(203,108,230,0.25);
-      transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
-    }
-    .waitlist-submit:hover { background: #d98ef0; transform: translateY(-1px); }
-    .waitlist-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
-    .waitlist-success { display: none; padding: 12px 0; }
-    .waitlist-success.active { display: block; }
-    .waitlist-success-icon { font-size: 2rem; margin-bottom: 8px; }
-    .waitlist-success h4 { margin: 0 0 6px; font-size: 1.1rem; color: var(--ink); }
-    .waitlist-success p { color: var(--muted); font-size: 0.9rem; margin: 0; }
 
     /* ── App Store Launch Slot ── */
     .launch-download {
@@ -210,9 +165,6 @@
     }
     @media (max-width: 540px) {
       .page-header { padding: 60px 20px 36px; }
-      .waitlist-inline { margin-bottom: 56px; }
-      .waitlist-input-wrap { flex-direction: column; }
-      .waitlist-submit { width: 100%; }
       .feature-phone-img { width: 200px; }
       .launch-download { margin-left: 20px; margin-right: 20px; flex-direction: column; align-items: stretch; gap: 14px; text-align: center; }
       .partnership-cta { width: 100%; }
@@ -249,7 +201,7 @@
     <p class="sub">One app for discovering events, exploring music, and tracking your rave journey — built by ravers, for the community.</p>
   </div>
 
-    <div class="launch-download fade-up">
+  <div class="launch-download fade-up">
     <p>Download Cuesic on the App Store.</p>
     <a class="app-store-link" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635" data-app-store-link>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
@@ -257,26 +209,6 @@
     </a>
   </div>
 
-  <!-- WAITLIST -->
-  <div class="waitlist-inline fade-up" id="waitlist" data-launch-waitlist hidden>
-    <div class="waitlist-toggle">
-      <button class="toggle-btn active" data-type="email">Email</button>
-      <button class="toggle-btn" data-type="phone">Phone</button>
-    </div>
-    <div class="waitlist-input-wrap active" id="email-wrap">
-      <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email">
-      <button class="waitlist-submit" id="email-submit">Join Waitlist</button>
-    </div>
-    <div class="waitlist-input-wrap" id="phone-wrap">
-      <input type="tel" id="phone-input" placeholder="+1 (555) 000-0000" autocomplete="tel">
-      <button class="waitlist-submit" id="phone-submit">Join Waitlist</button>
-    </div>
-    <div class="waitlist-success" id="waitlist-success">
-      <div class="waitlist-success-icon">🎉</div>
-      <h4>You're on the list!</h4>
-      <p>We'll reach out as soon as the app is ready to launch.</p>
-    </div>
-  </div>
 
   <!-- FEATURE ROWS -->
   <section class="section container">
@@ -432,56 +364,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    /* ── Inline Waitlist ── */
-    const ENDPOINT = 'https://formspree.io/f/xykaobvo';
-    const emailWrap = document.getElementById('email-wrap');
-    const phoneWrap = document.getElementById('phone-wrap');
-    const successEl = document.getElementById('waitlist-success');
-
-    document.querySelectorAll('.toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const t = btn.dataset.type;
-        emailWrap.classList.toggle('active', t === 'email');
-        phoneWrap.classList.toggle('active', t === 'phone');
-      });
-    });
-
-    async function submitWaitlist(input, submitBtn) {
-      if (!input.value.trim()) return;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting…';
-      const body = new FormData();
-      body.append(input.type === 'email' ? 'email' : 'phone', input.value.trim());
-      try {
-        const r = await fetch(ENDPOINT, { method: 'POST', body, headers: { Accept: 'application/json' } });
-        if (r.ok) {
-          emailWrap.classList.remove('active');
-          phoneWrap.classList.remove('active');
-          successEl.classList.add('active');
-        } else {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Join Waitlist';
-          alert('Something went wrong. Please try again.');
-        }
-      } catch {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Join Waitlist';
-        alert('Something went wrong. Please try again.');
-      }
-    }
-
-    document.getElementById('email-submit').addEventListener('click', () =>
-      submitWaitlist(document.getElementById('email-input'), document.getElementById('email-submit')));
-    document.getElementById('phone-submit').addEventListener('click', () =>
-      submitWaitlist(document.getElementById('phone-input'), document.getElementById('phone-submit')));
-
-    document.querySelectorAll('[data-app-store-link][aria-disabled="true"]').forEach(link => {
-      link.addEventListener('click', event => event.preventDefault());
-    });
-
-  </script>
 </body>
 </html>

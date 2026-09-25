@@ -84,7 +84,7 @@
       flex-wrap: wrap;
       margin-top: 8px;
     }
-    .btn-waitlist {
+    .btn-app-store {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -101,12 +101,12 @@
       transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
       text-decoration: none;
     }
-    .btn-waitlist:hover {
+    .btn-app-store:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 36px rgba(203,108,230,0.45);
       background: #d98ef0;
     }
-    .btn-waitlist svg { flex-shrink: 0; }
+    .btn-app-store svg { flex-shrink: 0; }
     .app-store-slot {
       background: rgba(255,255,255,0.05);
       color: var(--ink);
@@ -202,75 +202,6 @@
       transition: background 0.2s, transform 0.2s;
     }
     .mockup-dot.active { background: var(--magenta); transform: scale(1.3); }
-    /* ── Waitlist Modal ── */
-    #waitlist-modal { display: none; position: fixed; inset: 0; z-index: 3000; }
-    #waitlist-modal.active { display: block; }
-    .waitlist-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); }
-    .waitlist-card {
-      position: fixed; left: 50%; top: 50%;
-      transform: translate(-50%,-50%);
-      background: var(--card);
-      border: 1px solid rgba(203,108,230,0.2);
-      border-radius: 20px;
-      padding: 36px 32px 32px;
-      width: calc(100% - 40px);
-      max-width: 460px;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-      z-index: 3001;
-    }
-    .waitlist-close {
-      position: absolute; right: 14px; top: 12px;
-      background: rgba(255,255,255,0.92); color: #0b0b0d;
-      border: none; border-radius: 999px;
-      padding: 5px 10px; font-size: 0.9rem; font-weight: 700;
-      font-family: Manrope, sans-serif; cursor: pointer; line-height: 1.4;
-    }
-    .waitlist-card h3 { margin: 0 0 6px; font-size: 1.4rem; font-weight: 800; color: var(--ink); }
-    .waitlist-card p { margin: 0 0 24px; color: var(--muted); font-size: 0.95rem; }
-    .waitlist-toggle {
-      display: flex; gap: 8px; margin-bottom: 20px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 999px; padding: 4px;
-    }
-    .toggle-btn {
-      flex: 1; padding: 8px; border: none; border-radius: 999px;
-      font-family: Manrope, sans-serif; font-weight: 700; font-size: 0.9rem;
-      cursor: pointer; color: var(--muted); background: transparent;
-      transition: background 0.18s, color 0.18s;
-    }
-    .toggle-btn.active { background: var(--magenta); color: #0b0b0d; }
-    .waitlist-input-wrap { display: none; flex-direction: column; gap: 12px; }
-    .waitlist-input-wrap.active { display: flex; }
-    .waitlist-input-wrap input {
-      width: 100%; padding: 13px 16px;
-      border: 1px solid rgba(203,108,230,0.3);
-      border-radius: 10px;
-      background: rgba(255,255,255,0.04);
-      color: var(--ink); font-size: 1rem;
-      font-family: Manrope, sans-serif;
-      box-sizing: border-box;
-      transition: border-color 0.18s, box-shadow 0.18s;
-    }
-    .waitlist-input-wrap input:focus {
-      outline: none; border-color: var(--magenta);
-      box-shadow: 0 0 0 3px rgba(203,108,230,0.15);
-    }
-    .waitlist-input-wrap input::placeholder { color: var(--muted); opacity: 0.7; }
-    .waitlist-submit {
-      width: 100%; padding: 13px; border: none; border-radius: 10px;
-      background: var(--magenta); color: #0b0b0d;
-      font-weight: 700; font-size: 1rem; font-family: Manrope, sans-serif;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(203,108,230,0.25);
-      transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
-    }
-    .waitlist-submit:hover { background: #d98ef0; box-shadow: 0 6px 20px rgba(203,108,230,0.35); transform: translateY(-1px); }
-    .waitlist-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
-    .waitlist-success { display: none; text-align: center; padding: 16px 0 8px; }
-    .waitlist-success.active { display: block; }
-    .waitlist-success-icon { font-size: 2.5rem; margin-bottom: 12px; }
-    .waitlist-success h4 { margin: 0 0 8px; font-size: 1.2rem; color: var(--ink); }
-    .waitlist-success p { color: var(--muted); font-size: 0.95rem; margin: 0; }
     /* ── App Journey ── */
     .app-journey {
       padding: 120px 24px;
@@ -324,7 +255,7 @@
       .app-tagline { font-size: 1rem; }
       .feature-pills { gap: 8px; }
       .pill { font-size: 0.8rem; padding: 6px 11px; }
-      .btn-waitlist { width: 100%; justify-content: center; padding: 14px 20px; }
+      .btn-app-store { width: 100%; justify-content: center; padding: 14px 20px; }
       .app-cta-row { flex-direction: column; align-items: stretch; width: 100%; }
       .app-mockups { width: 100%; align-items: center; }
       .mockup-carousel { height: 360px; width: 100%; overflow: hidden; }
@@ -334,7 +265,6 @@
       .mockup-slide[data-pos="-1"] { transform: translateX(-126px) scale(0.75); opacity: 0.45; }
       .mockup-slide[data-pos="2"]  { opacity: 0; pointer-events: none; }
       .mockup-slide[data-pos="-2"] { opacity: 0; pointer-events: none; }
-      .waitlist-card { padding: 28px 20px 24px; }
       .app-journey { padding: 80px 20px; }
       .journey-intro { margin-bottom: 36px; }
       .journey-step { min-height: 32vh; }
@@ -491,11 +421,7 @@
         </div>
 
         <div class="app-cta-row">
-          <button class="btn-waitlist" id="open-waitlist" hidden>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Join the Waitlist
-          </button>
-          <a class="btn-waitlist app-store-slot" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635" data-app-store-link>
+          <a class="btn-app-store app-store-slot" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635" data-app-store-link>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
           <span>Download on the App Store</span>
           </a>
@@ -700,36 +626,6 @@
     </div>
   </div>
 
-  <!-- WAITLIST MODAL -->
-  <div id="waitlist-modal" aria-hidden="true" hidden>
-    <div class="waitlist-overlay" id="waitlist-overlay"></div>
-    <div class="waitlist-card" role="dialog" aria-modal="true" aria-labelledby="waitlist-title">
-      <button class="waitlist-close" id="waitlist-close" aria-label="Close">Close</button>
-      <div id="waitlist-form-wrap">
-        <h3 id="waitlist-title">Join the Waitlist</h3>
-        <p>Be the first to know when the Cuesic app drops. Drop your email or phone — your choice.</p>
-        <div class="waitlist-toggle">
-          <button class="toggle-btn active" data-type="email">Email</button>
-          <button class="toggle-btn" data-type="phone">Phone</button>
-        </div>
-        <form id="waitlist-email-wrap" class="waitlist-input-wrap active" action="https://formspree.io/f/xykaobvo" method="POST">
-          <input type="hidden" name="_type" value="waitlist-email">
-          <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-          <button type="submit" class="waitlist-submit">Notify Me</button>
-        </form>
-        <form id="waitlist-phone-wrap" class="waitlist-input-wrap" action="https://formspree.io/f/xykaobvo" method="POST">
-          <input type="hidden" name="_type" value="waitlist-phone">
-          <input type="tel" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
-          <button type="submit" class="waitlist-submit">Notify Me</button>
-        </form>
-      </div>
-      <div class="waitlist-success" id="waitlist-success">
-        <div class="waitlist-success-icon">🎉</div>
-        <h4>You're on the list!</h4>
-        <p>We'll hit you up the moment the Cuesic app is ready.</p>
-      </div>
-    </div>
-  </div>
 
   <script src="script.js"></script>
   <script>
@@ -777,48 +673,6 @@
 
     goTo(0);
 
-    // ── Waitlist Modal ──
-    const waitlistModal = document.getElementById('waitlist-modal');
-    const openBtn  = document.getElementById('open-waitlist');
-    const closeBtn = document.getElementById('waitlist-close');
-    const overlay  = document.getElementById('waitlist-overlay');
-    function openWaitlist()  { waitlistModal.classList.add('active'); waitlistModal.setAttribute('aria-hidden','false'); closeBtn.focus(); }
-    function closeWaitlist() { waitlistModal.classList.remove('active'); waitlistModal.setAttribute('aria-hidden','true'); }
-    openBtn.addEventListener('click', openWaitlist);
-    closeBtn.addEventListener('click', closeWaitlist);
-    overlay.addEventListener('click', closeWaitlist);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWaitlist(); });
-    const toggleBtns = document.querySelectorAll('.toggle-btn');
-    const emailWrap  = document.getElementById('waitlist-email-wrap');
-    const phoneWrap  = document.getElementById('waitlist-phone-wrap');
-    toggleBtns.forEach(btn => btn.addEventListener('click', () => {
-      toggleBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      emailWrap.classList.toggle('active', btn.dataset.type === 'email');
-      phoneWrap.classList.toggle('active', btn.dataset.type === 'phone');
-    }));
-    async function handleWaitlistSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const submitBtn = form.querySelector('.waitlist-submit');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-      try {
-        const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{'Accept':'application/json'} });
-        if (res.ok) {
-          document.getElementById('waitlist-form-wrap').style.display = 'none';
-          document.getElementById('waitlist-success').classList.add('active');
-        } else {
-          alert('Something went wrong — please try again.');
-          submitBtn.disabled = false; submitBtn.textContent = 'Notify Me';
-        }
-      } catch {
-        alert('Network error — please try again.');
-        submitBtn.disabled = false; submitBtn.textContent = 'Notify Me';
-      }
-    }
-    emailWrap.addEventListener('submit', handleWaitlistSubmit);
-    phoneWrap.addEventListener('submit', handleWaitlistSubmit);
 
     // ── Scroll-driven app journey ──
     const journeySteps = Array.from(document.querySelectorAll('[data-journey-screen]'));
@@ -836,9 +690,6 @@
       journeySteps.forEach(step => journeyObserver.observe(step));
     }
 
-    document.querySelectorAll('[data-app-store-link][aria-disabled="true"]').forEach(link => {
-      link.addEventListener('click', event => event.preventDefault());
-    });
 
   </script>
   <script>
