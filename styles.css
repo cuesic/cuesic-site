@@ -1,3 +1,7 @@
+/* The hidden attribute always wins, even over a class that sets display
+   (.btn-waitlist is inline-flex, which kept the hidden waitlist button visible). */
+[hidden] { display: none !important; }
+
 /* Meet the Founders Section */
 .founders-grid {
   display: flex;
