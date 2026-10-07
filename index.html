@@ -9,355 +9,11 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <!-- Fonts (optional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* ── App Hero ── */
-    .app-hero {
-      min-height: calc(100vh - var(--header-h));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 24px 60px;
-    }
-    .app-hero-inner {
-      max-width: 1100px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-    .app-hero-text {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .app-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--magenta);
-      background: rgba(203,108,230,0.1);
-      border: 1px solid rgba(203,108,230,0.25);
-      border-radius: 999px;
-      padding: 6px 14px;
-      width: fit-content;
-    }
-    .app-eyebrow-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--magenta);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%,100%{ opacity:1; transform:scale(1); }
-      50%{ opacity:0.5; transform:scale(0.75); }
-    }
-    .app-headline {
-      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin: 0;
-      color: var(--ink);
-    }
-    .app-headline .accent { color: var(--magenta); }
-    .app-sub {
-      font-size: clamp(1rem, 1.8vw, 1.2rem);
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.65;
-    }
-    .app-tagline {
-      font-size: clamp(1.05rem, 1.7vw, 1.15rem);
-      font-weight: 700;
-      color: var(--ink);
-      margin: 0;
-    }
-    .app-cta-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-    .btn-app-store {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 1rem;
-      font-family: Manrope, sans-serif;
-      cursor: pointer;
-      border: none;
-      background: var(--magenta);
-      color: #0b0b0d;
-      box-shadow: 0 8px 28px rgba(203,108,230,0.35);
-      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
-      text-decoration: none;
-    }
-    .btn-app-store:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 36px rgba(203,108,230,0.45);
-      background: #d98ef0;
-    }
-    .btn-app-store svg { flex-shrink: 0; }
-    .app-store-slot {
-      background: rgba(255,255,255,0.05);
-      color: var(--ink);
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: none;
-      cursor: default;
-    }
-    .app-store-slot:hover { background: rgba(255,255,255,0.08); box-shadow: none; transform: none; }
-    .app-store-slot small {
-      display: none;
-    }
-    /* ── Feature Pills ── */
-    .feature-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .pill svg { color: var(--magenta); flex-shrink: 0; }
-    /* ── Mockup Carousel ── */
-    .app-mockups {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      position: relative;
-    }
-    .mockup-carousel {
-      position: relative;
-      width: 100%;
-      height: 480px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .mockup-track {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      touch-action: pan-y;
-    }
-    .mockup-slide {
-      position: absolute;
-      width: 220px;
-      aspect-ratio: 9 / 19.5;
-      border-radius: 32px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.45s cubic-bezier(.4,0,.2,1),
-                  opacity 0.45s cubic-bezier(.4,0,.2,1),
-                  box-shadow 0.45s cubic-bezier(.4,0,.2,1),
-                  filter 0.45s cubic-bezier(.4,0,.2,1);
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    .mockup-slide img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      pointer-events: none;
-    }
-    .mockup-slide[data-pos="0"] {
-      transform: translateX(0) scale(1);
-      opacity: 1; z-index: 10;
-      box-shadow: none;
-      filter: none;
-    }
-    .mockup-slide[data-pos="1"]  { transform: translateX(190px) scale(0.8); opacity: 0.6; z-index: 5; filter: brightness(0.75); }
-    .mockup-slide[data-pos="-1"] { transform: translateX(-190px) scale(0.8); opacity: 0.6; z-index: 5; filter: brightness(0.75); }
-    .mockup-slide[data-pos="2"]  { --side:1; transform: translateX(calc(var(--side)*320px)) scale(0.65); opacity: 0.25; z-index: 1; filter: brightness(0.5); }
-    .mockup-slide[data-pos="-2"] { --side:-1; transform: translateX(calc(var(--side)*320px)) scale(0.65); opacity: 0.25; z-index: 1; filter: brightness(0.5); }
-    .mockup-dots { display: flex; gap: 8px; align-items: center; }
-    .mockup-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      border: none; cursor: pointer; padding: 0;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .mockup-dot.active { background: var(--magenta); transform: scale(1.3); }
-    /* ── App Journey ── */
-    .app-journey {
-      padding: 120px 24px;
-      overflow: clip;
-      background: radial-gradient(circle at 82% 42%, rgba(203,108,230,0.13), transparent 28%),
-                  radial-gradient(circle at 18% 72%, rgba(115,67,235,0.14), transparent 30%);
-    }
-    .journey-intro { max-width: 720px; margin: 0 auto 64px; text-align: center; }
-    .journey-kicker { margin: 0 0 12px; color: var(--magenta); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
-    .journey-intro h2 { margin: 0 0 14px; font-size: clamp(2rem, 4vw, 3.2rem); }
-    .journey-intro p { max-width: 560px; margin: 0 auto; color: var(--muted); line-height: 1.7; }
-    .journey-grid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; align-items: start; gap: clamp(48px, 10vw, 128px); max-width: 940px; margin: 0 auto; }
-    .journey-step { min-height: 52vh; display: flex; align-items: center; opacity: 0.42; transition: opacity 0.32s ease; }
-    .journey-step.active { opacity: 1; }
-    .journey-step-content { max-width: 470px; padding: 28px 0 28px 28px; border-left: 2px solid rgba(255,255,255,0.12); transition: border-color 0.32s ease, transform 0.32s ease; }
-    .journey-step.active .journey-step-content { border-color: var(--magenta); transform: translateX(8px); }
-    .journey-step-number { color: var(--magenta); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.13em; }
-    .journey-step h3 { margin: 10px 0 12px; font-size: clamp(1.65rem, 3vw, 2.35rem); }
-    .journey-step p { margin: 0; color: var(--muted); font-size: 1.02rem; line-height: 1.7; }
-    .journey-phone { position: sticky; top: 110px; padding-top: 6vh; }
-    .journey-phone-frame { position: relative; width: min(100%, 292px); aspect-ratio: 9 / 19.5; margin: 0 auto; overflow: hidden; border-radius: 40px; background: #050507; box-shadow: none; }
-    .journey-screen { position: absolute; inset: 0; opacity: 0; transform: scale(1.035); transition: opacity 0.45s ease, transform 0.65s ease; }
-    .journey-screen.active { opacity: 1; transform: scale(1); }
-    .journey-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    /* ── Responsive: Tablet ── */
-    @media (max-width: 860px) {
-      .app-hero { padding: 48px 24px 56px; min-height: auto; }
-      .app-hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
-      .app-eyebrow { margin: 0 auto; }
-      .app-cta-row { justify-content: center; }
-      .feature-pills { justify-content: center; }
-      .app-mockups { order: -1; }
-      .mockup-carousel { height: 400px; }
-      .mockup-slide { width: 170px; }
-      .mockup-slide[data-pos="1"]  { transform: translateX(150px) scale(0.8); }
-      .mockup-slide[data-pos="-1"] { transform: translateX(-150px) scale(0.8); }
-      .mockup-slide[data-pos="2"]  { transform: translateX(260px) scale(0.65); opacity: 0.15; }
-      .mockup-slide[data-pos="-2"] { transform: translateX(-260px) scale(0.65); opacity: 0.15; }
-      .journey-grid { grid-template-columns: 1fr; gap: 20px; }
-      .journey-phone { position: relative; top: auto; order: -1; padding-top: 0; }
-      .journey-phone-frame { width: 236px; }
-      .journey-step { min-height: 34vh; }
-    }
-    /* ── Responsive: Mobile ── */
-    @media (max-width: 540px) {
-      .app-hero { padding: 36px 0 48px; }
-      .app-hero-inner { gap: 36px; }
-      .app-hero-text { padding: 0 20px; align-items: center; }
-      .app-headline { font-size: clamp(1.9rem, 8vw, 2.6rem); }
-      .app-sub { font-size: 0.95rem; }
-      .app-tagline { font-size: 1rem; }
-      .feature-pills { gap: 8px; }
-      .pill { font-size: 0.8rem; padding: 6px 11px; }
-      .btn-app-store { width: 100%; justify-content: center; padding: 14px 20px; }
-      .app-cta-row { flex-direction: column; align-items: stretch; width: 100%; }
-      .app-mockups { width: 100%; align-items: center; }
-      .mockup-carousel { height: 360px; width: 100%; overflow: hidden; }
-      .mockup-track { width: 100%; }
-      .mockup-slide { width: 155px; }
-      .mockup-slide[data-pos="1"]  { transform: translateX(126px) scale(0.75); opacity: 0.45; }
-      .mockup-slide[data-pos="-1"] { transform: translateX(-126px) scale(0.75); opacity: 0.45; }
-      .mockup-slide[data-pos="2"]  { opacity: 0; pointer-events: none; }
-      .mockup-slide[data-pos="-2"] { opacity: 0; pointer-events: none; }
-      .app-journey { padding: 80px 20px; }
-      .journey-intro { margin-bottom: 36px; }
-      .journey-step { min-height: 32vh; }
-      .journey-step-content { padding: 18px 0 18px 18px; }
-    }
-
-    /* ── Org Tree ── */
-    .org-tree { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
-    .org-root-node {
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-    .org-root-logo { height: 64px; display: block; }
-    .org-trunk { width: 2px; height: 36px; background: rgba(203,108,230,0.35); }
-    .org-children {
-      display: flex;
-      gap: 24px;
-      position: relative;
-      justify-content: center;
-    }
-    .org-children::before {
-      content: '';
-      position: absolute;
-      top: 0; left: calc(50%/3 + 8px); right: calc(50%/3 + 8px);
-      height: 2px;
-      background: rgba(203,108,230,0.35);
-    }
-    .org-child { display: flex; flex-direction: column; align-items: center; }
-    .org-child-stem { width: 2px; height: 28px; background: rgba(203,108,230,0.35); }
-    .org-card {
-      display: flex; flex-direction: column; gap: 10px;
-      padding: 24px 22px;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px;
-      text-decoration: none;
-      color: var(--ink);
-      max-width: 240px;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .org-card:hover {
-      border-color: var(--magenta);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(203,108,230,0.18);
-    }
-    .org-card-icon {
-      width: 40px; height: 40px;
-      background: rgba(203,108,230,0.1);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--magenta);
-    }
-    .org-card-label {
-      font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--magenta);
-    }
-    .org-card h3 { margin: 0; font-size: 1rem; font-weight: 800; }
-    .org-card p { margin: 0; font-size: 0.875rem; color: var(--muted); line-height: 1.5; }
-    .org-card-cta { font-size: 0.85rem; font-weight: 700; color: var(--magenta); margin-top: 4px; }
-
-    /* ── About Grid ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 40px;
-    }
-    .about-item {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px;
-      padding: 28px 24px;
-    }
-    .about-item-icon {
-      width: 40px; height: 40px;
-      background: rgba(203,108,230,0.1);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--magenta);
-      margin-bottom: 16px;
-    }
-    .about-item h3 { margin: 0 0 10px; font-size: 1.05rem; font-weight: 800; }
-    .about-item p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
-
-    @media (max-width: 860px) {
-      .org-children { flex-direction: column; align-items: center; gap: 0; }
-      .org-children::before { display: none; }
-      .org-card { max-width: 320px; width: 100%; }
-      .about-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__cuesicMotion)document.documentElement.classList.remove('js')},2500)</script>
 </head>
 <body>
 
@@ -376,6 +32,7 @@
         <li><a href="entertainment.html">Entertainment</a></li>
         <li><a href="av.html">AV</a></li>
       </ul>
+      <a class="nav-cta" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635" data-app-store-link>Get the app</a>
     </nav>
   </header>
 
@@ -401,24 +58,6 @@
           the one place built for the EDM community.
         </p>
 
-        <div class="feature-pills">
-          <span class="pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-            Discover Events
-          </span>
-          <span class="pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-            Explore Music
-          </span>
-          <span class="pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Rave Resume
-          </span>
-          <span class="pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            EDM Community
-          </span>
-        </div>
 
         <div class="app-cta-row">
           <a class="btn-app-store app-store-slot" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635" data-app-store-link>
@@ -455,6 +94,28 @@
 
     </div>
   </section>
+
+  <!-- FEATURE MARQUEE -->
+  <div class="marquee feature-marquee" data-marquee aria-label="What you can do in the Cuesic app">
+    <div class="marquee-track feature-pills">
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+        Discover Events
+      </span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        Explore Music
+      </span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Rave Resume
+      </span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        EDM Community
+      </span>
+    </div>
+  </div>
 
   <!-- APP JOURNEY -->
   <section class="app-journey" aria-label="Explore the Cuesic app">
@@ -628,6 +289,7 @@
 
 
   <script src="script.js"></script>
+  <script src="motion.js"></script>
   <script>
     // ── Mockup Carousel ──
     const TOTAL = 4;

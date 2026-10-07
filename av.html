@@ -6,127 +6,11 @@
   <title>Cuesic AV — Audio & Visual Solutions</title>
   <meta name="description" content="Cuesic AV designs and installs custom audio and visual solutions for homes, bars, venues, and events." />
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .sub-hero {
-      min-height: calc(100vh - var(--header-h));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 24px 80px;
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .scroll-hint {
-      position: absolute;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--muted);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color 0.18s;
-    }
-    .scroll-hint:hover { color: var(--ink); }
-    .scroll-hint svg {
-      animation: bounce-down 1.8s ease-in-out infinite;
-    }
-    @keyframes bounce-down {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-    .sub-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--magenta);
-      background: rgba(203,108,230,0.1);
-      border: 1px solid rgba(203,108,230,0.25);
-      border-radius: 999px; padding: 6px 14px;
-      margin-bottom: 22px;
-    }
-    .sub-hero h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 800; line-height: 1.1; margin: 0 0 20px;
-    }
-    .sub-hero h1 .accent { color: var(--magenta); }
-    .sub-hero .sub { font-size: clamp(1rem, 2vw, 1.15rem); max-width: 560px; margin: 0 auto; }
-
-    /* Services Grid */
-    .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px;
-    }
-    .service-card {
-      background: var(--card); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px; padding: 28px 24px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .service-card:hover { border-color: var(--magenta); transform: translateY(-3px); }
-    .service-card-icon {
-      width: 44px; height: 44px; background: rgba(203,108,230,0.1);
-      border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      color: var(--magenta); margin-bottom: 16px;
-    }
-    .service-card h3 { margin: 0 0 10px; font-size: 1.05rem; font-weight: 800; }
-    .service-card p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
-
-    /* Why Us */
-    .why-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px;
-    }
-    .why-item {
-      display: flex; gap: 18px; align-items: flex-start;
-      background: var(--card); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px; padding: 24px 22px;
-    }
-    .why-icon {
-      width: 40px; height: 40px; flex-shrink: 0;
-      background: rgba(203,108,230,0.1); border-radius: 10px;
-      display: flex; align-items: center; justify-content: center; color: var(--magenta);
-    }
-    .why-item h3 { margin: 0 0 6px; font-size: 1rem; font-weight: 800; }
-    .why-item p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
-
-    /* Contact */
-    .contact-card {
-      background: var(--card); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 20px; padding: 40px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-    }
-    .contact-card h4 {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--magenta); margin: 0 0 10px;
-    }
-    .email { color: var(--ink); text-decoration: none; font-size: 1.05rem; font-weight: 600; }
-    .email:hover { color: var(--magenta); }
-    .contact-socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-    .contact-social-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 9px 18px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
-      color: var(--ink); text-decoration: none; font-size: 0.9rem; font-weight: 600;
-      transition: border-color 0.18s, background 0.18s;
-    }
-    .contact-social-btn:hover { border-color: var(--magenta); background: rgba(203,108,230,0.08); }
-    .contact-social-btn svg { fill: currentColor; }
-
-    @media (max-width: 860px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .contact-card { grid-template-columns: 1fr; gap: 28px; padding: 28px 22px; }
-    }
-  </style>
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__cuesicMotion)document.documentElement.classList.remove('js')},2500)</script>
 </head>
 <body>
 
@@ -144,6 +28,7 @@
         <li><a href="entertainment.html">Entertainment</a></li>
         <li><a href="av.html" style="color:var(--magenta)">AV</a></li>
       </ul>
+      <a class="nav-cta" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635" data-app-store-link>Get the app</a>
     </nav>
   </header>
 
@@ -286,5 +171,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="motion.js"></script>
 </body>
 </html>
