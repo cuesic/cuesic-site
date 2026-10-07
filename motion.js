@@ -212,7 +212,7 @@
   }
 
   /* ---------- Scroll progress (--p from 0 to 1) ----------
-     "enter":   0 as the element's top meets the viewport bottom, 1 a little over half a screen later.
+     "enter":   0 as the element's top meets the viewport bottom, 1 a little over half a screen later; never decreases.
      "through": 0 as its top meets the viewport middle, 1 as its bottom does. */
   $$('.org-tree, .feature-row').forEach(el => { if (!el.dataset.progress) el.dataset.progress = 'enter'; });
   $$('.journey-steps').forEach(el => { if (!el.dataset.progress) el.dataset.progress = 'through'; });
@@ -227,7 +227,11 @@
       if (r.bottom < -vh || r.top > vh * 2) return;
       let p;
       if (el.dataset.progress === 'through') p = clamp((vh * 0.5 - r.top) / r.height);
-      else p = atEnd ? 1 : clamp((vh - r.top) / (vh * 0.6));
+      else {
+        // Entrances only ever move forward, so scrolling back up never empties a section.
+        p = atEnd ? 1 : clamp((vh - r.top) / (vh * 0.6));
+        p = Math.max(p, parseFloat(el.style.getPropertyValue('--p')) || 0);
+      }
       el.style.setProperty('--p', p.toFixed(4));
     });
   }
