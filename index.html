@@ -354,66 +354,6 @@
 
 
   </script>
-  <script>
-    const POSTS = [
-      {
-        url: "https://www.tiktok.com/@cuesic/video/7633561798083431694",
-        platform: "tiktok",
-        oEmbed: "https://www.tiktok.com/oembed?url="
-      },
-      {
-        url: "https://www.tiktok.com/@cuesic/video/7535297874532273421",
-        platform: "tiktok",
-        oEmbed: "https://www.tiktok.com/oembed?url="
-      },
-      {
-        url: "https://www.tiktok.com/@cuesic/photo/7644983869267135757",
-        platform: "tiktok",
-        oEmbed: "https://www.tiktok.com/oembed?url="
-      }
-    ];
-
-    const container = document.getElementById('social-posts');
-
-    const igIcon = `<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1.3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>`;
-    const ttIcon = `<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M21 8.5a7.5 7.5 0 0 1-5-2v7.6a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v2.7a2.9 2.9 0 1 0 2.1 2.8V2h2.6a5 5 0 0 0 5 5v1.5Z"/></svg>`;
-
-    function makeCard(thumbUrl, post) {
-      const a = document.createElement('a');
-      a.href = post.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'post-card';
-
-      if (thumbUrl) {
-        a.innerHTML = `
-          <img src="${thumbUrl}" alt="Post thumbnail" />
-          <span class="post-play">▶</span>
-          <span class="post-platform-icon">${post.platform === 'instagram' ? igIcon : ttIcon}</span>
-        `;
-      } else {
-        a.innerHTML = `
-          <div class="post-fallback post-fallback--${post.platform}">
-            ${post.platform === 'instagram' ? igIcon : ttIcon}
-            <span>View on ${post.platform === 'instagram' ? 'Instagram' : 'TikTok'}</span>
-          </div>
-          <span class="post-play">▶</span>
-        `;
-      }
-      container.appendChild(a);
-    }
-
-    POSTS.forEach(post => {
-      if (post.oEmbed) {
-        fetch(post.oEmbed + encodeURIComponent(post.url))
-          .then(r => r.json())
-          .then(data => makeCard(data.thumbnail_url, post))
-          .catch(() => makeCard(null, post));
-      } else {
-        makeCard(null, post);
-      }
-    });
-  </script>
     <!-- Klaviyo Popup Script (disabled) -->
     <!-- <script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/TJ6bND/klaviyo.js?company_id=TJ6bND'></script>
     <script type="text/javascript">
