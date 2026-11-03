@@ -199,7 +199,7 @@
 
   /* ---------- Pointer glow on cards ---------- */
   const GLOW = '.card, .org-card, .about-item, .service-card, .why-item, ' +
-               '.contact-card, .contact-card-inner, .partnership-card';
+               '.contact-card, .contact-card-inner, .partnership-card, .review-card';
   $$(GLOW).forEach(el => el.setAttribute('data-glow', ''));
   if (window.matchMedia('(hover: hover)').matches) {
     document.addEventListener('pointermove', e => {
