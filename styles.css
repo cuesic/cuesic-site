@@ -388,6 +388,31 @@ html.scrolled .nav{
 }
 .feature-marquee .pill svg{ width:18px; height:18px; }
 
+/* Home: App Store reviews scrolling as compact cards */
+.home-reviews{ padding:clamp(64px, 8vw, 104px) 0 0; }
+.home-reviews-head{ text-align:center; display:flex; flex-direction:column; align-items:center; padding:0 20px; }
+.home-reviews-head h2{ margin:0; font-size:clamp(1.8rem, 3.4vw, 2.6rem); }
+.review-marquee{ margin-top:36px; padding:8px 0 12px; --speed:26; }
+.review-marquee .marquee-track{ --gap:18px; align-items:stretch; }
+.review-mini{
+  width:320px; flex-shrink:0;
+  padding:24px 24px 22px;
+  display:flex; flex-direction:column; gap:10px;
+  color:var(--ink); text-decoration:none;
+}
+.review-mini .review-stars{ font-size:.9rem; }
+.review-mini-title{ font-size:1.05rem; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
+.review-mini-quote{ flex:1; color:var(--muted); font-size:.93rem; line-height:1.6; }
+.review-mini-name{ font-size:.84rem; font-weight:700; color:var(--brand-hi); }
+.review-mini-name span{ font-weight:500; color:var(--muted); }
+.review-marquee .review-mini:hover{ transform:none; }
+.home-reviews-more{ margin:18px 0 0; text-align:center; font-size:.95rem; font-weight:700; }
+.home-reviews-more a{ color:var(--brand-hi); text-decoration:none; }
+.home-reviews-more a:hover{ color:var(--ink); }
+/* Without the animation (reduced motion, no JS) show three cards, wrapped. */
+.review-marquee:not(.is-ready) .marquee-track{ padding:0 20px; }
+.review-marquee:not(.is-ready) .review-mini:nth-child(n+4){ display:none; }
+
 /* ================================
    Home hero
 ================================= */
@@ -980,6 +1005,7 @@ html.js [data-reveal].revealed{
   .gallery-rows .gallery-item img{ height:190px; }
   .gallery-item img{ height:220px; }
   .feature-marquee .pill{ padding:11px 18px; font-size:.95rem; }
+  .review-mini{ width:276px; padding:22px 20px 20px; }
 }
 
 /* ================================
