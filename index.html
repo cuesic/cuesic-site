@@ -169,51 +169,21 @@
     <p class="home-reviews-more fade-up"><a href="app/#reviews">Read more reviews →</a></p>
   </section>
 
-  <!-- APP JOURNEY -->
-  <section class="app-journey" aria-label="Explore the Cuesic app">
-    <div class="journey-intro fade-up">
-      <p class="journey-kicker">Designed for the EDM community</p>
-      <h2>Your next show starts here.</h2>
-      <p>Scroll through the moments that make Cuesic your home base before, during, and after the music.</p>
+  <!-- LISTEN: Cuesic playlists -->
+  <section id="listen" class="listen" aria-labelledby="listen-title">
+    <div class="listen-head fade-up">
+      <p class="listen-kicker">The Cuesic sound</p>
+      <h2 id="listen-title">Press <span class="accent">Play</span></h2>
+      <p>The tracks we can't stop playing, all in one playlist. Follow along and hear what's next.</p>
     </div>
-    <div class="journey-grid">
-      <div class="journey-steps">
-        <article class="journey-step active" data-journey-screen="0">
-          <div class="journey-step-content">
-            <div class="journey-step-number">01 — Discover</div>
-            <h3>Find the next set.</h3>
-            <p>See EDM events around you, explore lineups, and make your next weekend plan in one place.</p>
-          </div>
-        </article>
-        <article class="journey-step" data-journey-screen="1">
-          <div class="journey-step-content">
-            <div class="journey-step-number">02 — Track</div>
-            <h3>Make every show count.</h3>
-            <p>Build your rave history, celebrate the artists you have seen, and keep the memories close.</p>
-          </div>
-        </article>
-        <article class="journey-step" data-journey-screen="2">
-          <div class="journey-step-content">
-            <div class="journey-step-number">03 — Connect</div>
-            <h3>Bring your crew.</h3>
-            <p>Compare stats, plan nights out, and connect with people who share your sound.</p>
-          </div>
-        </article>
-        <article class="journey-step" data-journey-screen="3">
-          <div class="journey-step-content">
-            <div class="journey-step-number">04 — Explore</div>
-            <h3>Stay close to the music.</h3>
-            <p>Follow artists, discover new releases, and keep the energy going between events.</p>
-          </div>
-        </article>
-      </div>
-      <div class="journey-phone" aria-hidden="true">
-        <div class="journey-phone-frame">
-          <div class="journey-screen active"><img src="assets/Mockup2.png" alt=""></div>
-          <div class="journey-screen"><img src="assets/Mockup3.png" alt=""></div>
-          <div class="journey-screen"><img src="assets/Mockup4.png" alt=""></div>
-          <div class="journey-screen"><img src="assets/Mockup5.png" alt=""></div>
-        </div>
+    <div class="listen-grid fade-up">
+      <div class="listen-player">
+        <iframe
+          title="Cuesic playlist on Spotify"
+          src="https://open.spotify.com/embed/playlist/4xc7z5BurMzHraFoA2F6hV?utm_source=generator&amp;theme=0"
+          width="100%" height="452" frameborder="0" loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <a class="listen-link" href="https://open.spotify.com/playlist/4xc7z5BurMzHraFoA2F6hV" target="_blank" rel="noopener">Follow on Spotify →</a>
       </div>
     </div>
   </section>
@@ -386,23 +356,6 @@
     }
 
     goTo(0);
-
-
-    // ── Scroll-driven app journey ──
-    const journeySteps = Array.from(document.querySelectorAll('[data-journey-screen]'));
-    const journeyScreens = Array.from(document.querySelectorAll('.journey-screen'));
-    if (journeySteps.length && journeyScreens.length && 'IntersectionObserver' in window) {
-      const journeyObserver = new IntersectionObserver(entries => {
-        const visible = entries
-          .filter(entry => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        const activeIndex = Number(visible.target.dataset.journeyScreen);
-        journeySteps.forEach(step => step.classList.toggle('active', Number(step.dataset.journeyScreen) === activeIndex));
-        journeyScreens.forEach((screen, index) => screen.classList.toggle('active', index === activeIndex));
-      }, { rootMargin: '-35% 0px -35% 0px', threshold: [0.2, 0.55, 0.8] });
-      journeySteps.forEach(step => journeyObserver.observe(step));
-    }
 
 
   </script>

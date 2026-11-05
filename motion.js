@@ -215,7 +215,6 @@
      "enter":   0 as the element's top meets the viewport bottom, 1 a little over half a screen later; never decreases.
      "through": 0 as its top meets the viewport middle, 1 as its bottom does. */
   $$('.org-tree, .feature-row').forEach(el => { if (!el.dataset.progress) el.dataset.progress = 'enter'; });
-  $$('.journey-steps').forEach(el => { if (!el.dataset.progress) el.dataset.progress = 'through'; });
   const progressEls = reduce ? [] : $$('[data-progress]');
   const clamp = v => Math.max(0, Math.min(1, v));
 
