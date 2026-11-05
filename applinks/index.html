@@ -1,0 +1,255 @@
+<!doctype html>
+<!--
+  Cuesic App link-in-bio page: https://cuesic.com/applinks/
+  For the app's own Instagram, TikTok, YouTube and Threads bios (@thecuesicapp).
+  Not linked from the site's menus and kept out of search results (noindex).
+  Shares its look with /links/ (the Cuesic brand page); keep the two in step.
+  Reviews are quoted from the App Store with wording unchanged.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Cuesic App | Links</title>
+<meta name="description" content="Get the Cuesic app, follow it everywhere and see what ravers are saying." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0b0b0d" />
+<link rel="icon" type="image/png" href="/assets/favicon.png" />
+<link rel="apple-touch-icon" href="/assets/favicon.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Cuesic" />
+<meta property="og:title" content="Cuesic App | Links" />
+<meta property="og:description" content="Get the Cuesic app, follow it everywhere and see what ravers are saying." />
+<meta property="og:url" content="https://cuesic.com/applinks/" />
+<meta property="og:image" content="https://cuesic.com/assets/OG_HomeBase.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://cuesic.com/assets/OG_HomeBase.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0b0b0d;
+    --card: #17171c;
+    --card-hi: #1f1f26;
+    --line: rgba(255, 255, 255, .08);
+    --ink: #f5f5f7;
+    --muted: #a1a1aa;
+    --brand: #cb6ce6;
+    --brand-hi: #e3a8f5;
+    --brand-deep: #7343eb;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; min-height: 100vh; min-height: 100dvh;
+    color: var(--ink); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background:
+      radial-gradient(90% 55% at 50% -8%, rgba(203, 108, 230, .30), transparent 70%),
+      radial-gradient(70% 45% at 100% 100%, rgba(115, 67, 235, .16), transparent 70%),
+      var(--bg);
+    padding: max(44px, env(safe-area-inset-top)) 16px max(32px, env(safe-area-inset-bottom));
+    -webkit-font-smoothing: antialiased;
+  }
+  main { width: 100%; max-width: 440px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 28px; }
+  .avatar {
+    width: 96px; height: 96px; border-radius: 26px; display: block; margin: 0 auto 18px;
+    box-shadow: 0 0 0 1px rgba(203, 108, 230, .35), 0 14px 44px rgba(203, 108, 230, .35);
+  }
+  h1 { margin: 0 0 8px; font-size: 30px; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; }
+  .tagline { margin: 0; color: var(--ink); font-size: 15px; font-weight: 600; line-height: 1.5; }
+
+  .app {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 18px; margin-bottom: 26px; border-radius: 20px;
+    color: #0b0b0d; text-decoration: none;
+    background: linear-gradient(110deg, var(--brand-hi) 0%, var(--brand) 45%, #a35ae8 100%);
+    box-shadow: 0 14px 40px rgba(203, 108, 230, .38);
+    transition: transform .18s var(--ease), box-shadow .3s;
+  }
+  .app .icon { background: rgba(11, 11, 13, .9); color: #fff; }
+  .app .label { font-size: 17px; }
+  .app .sub { color: rgba(11, 11, 13, .7); }
+  .app .go { color: #0b0b0d; opacity: .8; }
+
+  h2 {
+    margin: 0 0 10px 4px; color: var(--muted);
+    font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  }
+  section { margin-bottom: 24px; }
+  .list { display: grid; gap: 10px; }
+
+  .link {
+    display: flex; align-items: center; gap: 14px;
+    min-height: 64px; padding: 12px 16px 12px 12px; border-radius: 18px;
+    background: var(--card); border: 1px solid var(--line);
+    color: var(--ink); text-decoration: none;
+    transition: transform .18s var(--ease), background-color .25s, border-color .25s;
+  }
+  .icon {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center; background: rgba(255, 255, 255, .06); color: var(--ink);
+  }
+  .icon svg { width: 21px; height: 21px; }
+  .text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .label { font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-size: 13.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .go { flex-shrink: 0; width: 18px; height: 18px; color: var(--muted); transition: transform .2s var(--ease), color .2s; }
+
+  .spotify .icon { color: #1ed760; }
+  .soundcloud .icon { color: #ff5500; }
+  .youtube .icon { color: #ff0033; }
+  .instagram .icon { color: #ff4f8b; }
+  .linkedin .icon { color: #4d9fec; }
+  .mail .icon { color: var(--brand-hi); }
+  .threads .icon, .tiktok .icon { color: var(--ink); }
+
+  .reviews-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 4px 10px; }
+  .reviews-head h2 { margin: 0; }
+  .score { color: var(--brand-hi); font-size: 13px; font-weight: 700; white-space: nowrap; }
+  .review {
+    margin: 0; padding: 18px 18px 16px; border-radius: 18px;
+    background: var(--card); border: 1px solid var(--line);
+  }
+  .stars { color: var(--brand); font-size: 14px; letter-spacing: 2px; }
+  .review h3 { margin: 8px 0 6px; font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
+  .review blockquote { margin: 0; }
+  .review blockquote p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+  .review figcaption { margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--brand-hi); }
+  .review figcaption span { font-weight: 500; color: var(--muted); }
+  .all-reviews {
+    display: block; margin-top: 14px; text-align: center;
+    color: var(--brand-hi); font-size: 14.5px; font-weight: 700; text-decoration: none;
+  }
+  .all-reviews:hover { color: var(--ink); }
+
+  @media (hover: hover) {
+    .link:hover { background: var(--card-hi); border-color: rgba(203, 108, 230, .35); transform: translateY(-2px); }
+    .link:hover .go { color: var(--brand-hi); transform: translate(2px, -2px); }
+    .app:hover { transform: translateY(-2px); box-shadow: 0 18px 48px rgba(203, 108, 230, .5); }
+  }
+  .link:active, .app:active { transform: scale(.98); }
+  a:focus-visible { outline: 2px solid var(--brand-hi); outline-offset: 3px; }
+
+  footer { margin-top: 34px; text-align: center; color: rgba(255, 255, 255, .35); font-size: 12.5px; }
+  footer a { color: inherit; text-decoration: none; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    header, .app, section { animation: rise .7s var(--ease) both; }
+    .app { animation-delay: .06s; }
+    section:nth-of-type(1) { animation-delay: .12s; }
+    section:nth-of-type(2) { animation-delay: .18s; }
+    section:nth-of-type(3) { animation-delay: .24s; }
+    section:nth-of-type(4) { animation-delay: .3s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img class="avatar" src="/assets/favicon.png" alt="" width="96" height="96" />
+    <h1>Cuesic App</h1>
+    <p class="tagline">Your EDM home base.<br>Find shows, track your sets, rave with friends.</p>
+  </header>
+
+  <a class="app" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635" target="_blank" rel="noopener">
+    <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span>
+    <span class="text"><span class="label">Download Cuesic</span><span class="sub">Free on the App Store</span></span>
+    <svg class="go" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+  </a>
+
+  <section aria-labelledby="h-follow">
+    <h2 id="h-follow">Follow the app</h2>
+    <div class="list">
+      <a class="link instagram" href="https://www.instagram.com/thecuesicapp" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></span>
+        <span class="text"><span class="label">Instagram</span><span class="sub">@thecuesicapp</span></span>
+        <svg class="go" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+      <a class="link tiktok" href="https://www.tiktok.com/@thecuesicapp" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
+        <span class="text"><span class="label">TikTok</span><span class="sub">@thecuesicapp</span></span>
+        <svg class="go" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+      <a class="link youtube" href="https://www.youtube.com/@cuesicapp" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+        <span class="text"><span class="label">YouTube</span><span class="sub">@cuesicapp</span></span>
+        <svg class="go" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+      <a class="link threads" href="https://www.threads.com/@thecuesicapp" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg></span>
+        <span class="text"><span class="label">Threads</span><span class="sub">@thecuesicapp</span></span>
+        <svg class="go" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-contact">
+    <h2 id="h-contact">Contact</h2>
+    <div class="list">
+      <a class="link mail" href="mailto:partnership@cuesic.com?subject=Cuesic%20App%20Partnership">
+        <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+        <span class="text"><span class="label">Promote with Cuesic</span><span class="sub">partnership@cuesic.com</span></span>
+        <svg class="go" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+      <a class="link mail" href="mailto:app@cuesic.com">
+        <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span>
+        <span class="text"><span class="label">App help &amp; feedback</span><span class="sub">app@cuesic.com</span></span>
+        <svg class="go" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-reviews">
+    <div class="reviews-head">
+      <h2 id="h-reviews">Reviews</h2>
+      <span class="score">★ 5.0 on the App Store</span>
+    </div>
+    <div class="list">
+      <figure class="review">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3>I LOVE THIS APP.</h3>
+        <blockquote><p>“It’s quite literally a homebase for everything EDM. And when I say everything, I mean EVERYTHING. You can find shows and festivals, see what events your friends are going to, and keep up with the latest music releases all in one place. […] I love that you can rate venues, events, and artists too.”</p></blockquote>
+        <figcaption>34683$ <span>· App Store review</span></figcaption>
+      </figure>
+      <figure class="review">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3>Changed the game</h3>
+        <blockquote><p>“The EDM community needed a hub and Cuesic does it better than anybody. Getting to log my events and see which of my friends are going makes my life so much easier.”</p></blockquote>
+        <figcaption>Jhitjhit3000 <span>· App Store review</span></figcaption>
+      </figure>
+      <figure class="review">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3>Just Downloaded and I Love It</h3>
+        <blockquote><p>“It’s super organized, and let me find artists that I had no idea were performing in my area.”</p></blockquote>
+        <figcaption>CloverOps <span>· App Store review</span></figcaption>
+      </figure>
+      <figure class="review">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3>LOVE IT</h3>
+        <blockquote><p>“Easiest way to make plans for the weekend as a last minute function attendee.”</p></blockquote>
+        <figcaption>Saloni N. <span>· App Store review</span></figcaption>
+      </figure>
+      <figure class="review">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3>Great for Finding EDM Events</h3>
+        <blockquote><p>“Really useful for finding EDM events and shows. Super easy to use and I’ve found a few events I didn’t know about.”</p></blockquote>
+        <figcaption>Loganc119 <span>· App Store review</span></figcaption>
+      </figure>
+    </div>
+    <a class="all-reviews" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635?see-all=reviews" target="_blank" rel="noopener">Read all reviews on the App Store →</a>
+  </section>
+
+  <footer>© <span id="y">2026</span> <a href="/app/">Cuesic</a></footer>
+</main>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

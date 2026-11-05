@@ -59,11 +59,8 @@
   main { width: 100%; max-width: 440px; margin: 0 auto; }
 
   header { text-align: center; margin-bottom: 28px; }
-  .avatar {
-    width: 96px; height: 96px; border-radius: 26px; display: block; margin: 0 auto 18px;
-    box-shadow: 0 0 0 1px rgba(203, 108, 230, .35), 0 14px 44px rgba(203, 108, 230, .35);
-  }
-  h1 { margin: 0 0 6px; font-size: 30px; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; }
+  h1 { margin: 0 0 14px; line-height: 0; }
+  .logo { width: 220px; height: auto; max-width: 70%; filter: drop-shadow(0 8px 30px rgba(203, 108, 230, .4)); }
   .tagline { margin: 0; color: var(--ink); font-size: 15px; font-weight: 600; line-height: 1.5; }
 
   .app {
@@ -134,8 +131,7 @@
 <body>
 <main>
   <header>
-    <img class="avatar" src="/assets/favicon.png" alt="" width="96" height="96" />
-    <h1>Cuesic</h1>
+    <h1><img class="logo" src="/assets/trimmedCuesicTransp.png" alt="Cuesic" width="320" height="132" /></h1>
     <p class="tagline">Your EDM home base.<br>Shows, music and the people who love it.</p>
   </header>
 
