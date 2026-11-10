@@ -2,15 +2,10 @@
 <!--
   Cuesic shared-event bounce page.
 
-  Deploy: copy this file to /e/index.html in the repo that serves cuesic.com (GitHub
-  Pages), so it is reachable at https://cuesic.com/e/. Shared links look like
-  https://cuesic.com/e/?id=<eventId> — the query-string form is used because GitHub
-  Pages is static with no rewrite rules, so a path like /e/<eventId> would 404 (and a
-  404 also breaks the iMessage link preview).
-
-  If cuesic.com later moves to a host with rewrites (Netlify, Cloudflare Pages, Vercel),
-  route /e/* to this file and the prettier /e/<eventId> form can be used instead — the
-  script below already reads an id from the path as a fallback.
+  Served at https://cuesic.com/e/ by Cloudflare Pages. Shared links look like
+  https://cuesic.com/e/?id=<eventId> (the form the app shares); /e/<eventId> also
+  works, served by functions/e/[id].js, and the script below reads an id from
+  either.
 -->
 <html lang="en">
 <head>
@@ -20,10 +15,12 @@
 
 <!--
   Open Graph tags build the rich preview card in iMessage, WhatsApp, Slack and
-  the rest. They must be present in the HTML as served: link crawlers do not run
-  JavaScript, so this page cannot look the event up and describe it. That is why
-  the card is generic Cuesic branding rather than the shared event's own name and
-  poster — per-event previews would need a host that renders server-side.
+  the rest. Link crawlers do not run JavaScript, so for a shared event the
+  Pages Function in functions/e/ fills these tags in on the server with that
+  event's name, date, venue and flyer (functions/_lib/handleEventPage.js). The
+  values below are the generic Cuesic card, used when there is no event id or
+  the event can't be looked up. The function finds the tags by their
+  property/name attributes, so keep those as they are.
 
   og:image must be an absolute URL. A relative path silently produces a card with
   no thumbnail, which is the usual reason these look broken.
