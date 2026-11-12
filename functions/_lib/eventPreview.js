@@ -142,9 +142,35 @@ function isPublicImageUrl(value) {
  * The preview fields for one event row. Plain (unescaped) strings; the
  * rewriter sets them as attribute values / text, which escapes them.
  */
+/** "Sat, Nov 14" or "Jan 21 – 25" / "Jan 30 – Feb 2": short enough for a title line. */
+export function formatShortWhen(event) {
+  const start = parseDay(event.event_date);
+  if (!start) return null;
+  const opts = { month: "short", day: "numeric", timeZone: "UTC" };
+  const end = parseDay(event.event_end_date);
+  if (end && event.event_end_date !== event.event_date) {
+    const sameMonth = start.getUTCMonth() === end.getUTCMonth() && start.getUTCFullYear() === end.getUTCFullYear();
+    const endText = sameMonth ? String(end.getUTCDate()) : end.toLocaleDateString("en-US", opts);
+    return `${start.toLocaleDateString("en-US", opts)} – ${endText}`;
+  }
+  return start.toLocaleDateString("en-US", { ...opts, weekday: "short" });
+}
+
+/** "BETTE at BERHTA, Washington": venue and city, for the title line. */
+function shortWhere(event) {
+  const venue = clean(event.venue_name);
+  const city = clean(event.city);
+  if (venue && city && !venue.toLowerCase().includes(city.toLowerCase())) return `${venue}, ${city}`;
+  return venue || city;
+}
+
 export function buildPreview(event, eventId) {
   const name = clean(event.name) || "An event on Cuesic";
-  const title = event.is_canceled ? `Canceled: ${name}` : name;
+  const heading = event.is_canceled ? `Canceled: ${name}` : name;
+  // iMessage shows only the title (never og:description), so the date and
+  // venue go in the title too; apps that show the description get the full
+  // version there.
+  const title = [heading, formatShortWhen(event), shortWhere(event)].filter(Boolean).join(" · ");
   const when = formatEventWhen(event);
   const where = formatEventWhere(event);
   const facts = [when, where].filter(Boolean).join(" · ");
@@ -152,7 +178,7 @@ export function buildPreview(event, eventId) {
   const hasImage = isPublicImageUrl(event.thumbnail_image_url);
   return {
     title,
-    pageTitle: `${title} · Cuesic`,
+    pageTitle: `${heading} · Cuesic`,
     description,
     url: `https://cuesic.com/e/?id=${encodeURIComponent(eventId)}`,
     image: hasImage ? event.thumbnail_image_url.trim() : FALLBACK_IMAGE,

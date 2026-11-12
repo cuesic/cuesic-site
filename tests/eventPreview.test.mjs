@@ -66,7 +66,7 @@ test("buildPreview with flyer", () => {
     event_date: "2026-10-11", event_datetime: "2026-10-12T05:30:00+00:00", timezone: "America/Los_Angeles",
     thumbnail_image_url: "https://i.scdn.co/image/abc", is_canceled: false,
   }, ID);
-  assert.equal(p.title, "Prospa");
+  assert.equal(p.title, "Prospa · Sun, Oct 11 · LIV Nightclub at Fontainebleau, Las Vegas");
   assert.equal(p.pageTitle, "Prospa · Cuesic");
   assert.equal(p.description, "Sun, October 11, 2026 · 10:30 PM PDT · LIV Nightclub at Fontainebleau, Las Vegas, NV. See who's going on Cuesic.");
   assert.equal(p.image, "https://i.scdn.co/image/abc");
@@ -84,6 +84,8 @@ test("buildPreview without flyer, or a non-https one, uses the fallback", () => 
 });
 
 test("buildPreview: canceled, blank name", () => {
-  assert.equal(buildPreview({ name: "X", event_date: "2026-10-11", is_canceled: true }, ID).title, "Canceled: X");
+  assert.equal(buildPreview({ name: "X", event_date: "2026-10-11", is_canceled: true }, ID).title, "Canceled: X · Sun, Oct 11");
+  assert.equal(buildPreview({ name: "X", event_date: "2026-10-11", is_canceled: true }, ID).pageTitle, "Canceled: X · Cuesic");
+  assert.equal(buildPreview({ name: "Fest", event_date: "2027-01-30", event_end_date: "2027-02-02", city: "Miami" }, ID).title, "Fest · Jan 30 – Feb 2 · Miami");
   assert.equal(buildPreview({ name: "  ", event_date: null }, ID).description, "See who's going on Cuesic.");
 });
