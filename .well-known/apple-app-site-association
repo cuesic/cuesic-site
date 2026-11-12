@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["S5N5645L8S.com.ibansal0319.ravehub"],
+        "components": [
+          { "/": "/e/*", "comment": "Shared events: cuesic.com/e/?id=<id> and /e/<id>" },
+          { "/": "/j/*", "comment": "Referral invites: cuesic.com/j/?code=<code>" }
+        ]
+      }
+    ]
+  }
+}

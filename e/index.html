@@ -60,14 +60,20 @@
   }
   h1 { font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.2px; }
   p { font-size: 14px; margin: 0; color: rgba(255, 255, 255, 0.6); }
-  a { color: #9b6bff; font-size: 14px; font-weight: 700; text-decoration: none; }
+  .actions { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+  .btn { display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 16px; font-size: 16px; font-weight: 800; text-decoration: none; }
+  .btn-primary { background: #9b6bff; color: #fff; }
+  .btn-secondary { background: transparent; color: #9b6bff; border: 1px solid rgba(155, 107, 255, 0.45); }
 </style>
 </head>
 <body>
 <main>
-  <h1>Opening Cuesic…</h1>
-  <p>Taking you to this event.</p>
-  <a id="fallback" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635">Get the Cuesic app</a>
+  <h1>Open this event in Cuesic</h1>
+  <p>Don't have the app yet? Get it free on the App Store.</p>
+  <div class="actions">
+    <a class="btn btn-primary" id="open" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635">Open in Cuesic</a>
+    <a class="btn btn-secondary" id="fallback" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635">Get the app</a>
+  </div>
 </main>
 <script>
   // Where people land when the app doesn't open (not installed, or desktop): the
@@ -86,12 +92,16 @@
 
   document.getElementById("fallback").href = FALLBACK_URL;
 
+  // No automatic App Store redirect while an event id is present: iOS asks
+  // "Open in Cuesic?" first, and a timer kept running behind that prompt, so a
+  // person who tapped Open had already been sent to the App Store. The page now
+  // tries the app once and then stays, with Open and Get the app buttons.
+  // (Universal Links, from the build that adds applinks:cuesic.com, open the
+  // app before this page loads at all.)
   if (eventId) {
-    window.location.href = "ravehub://event?id=" + encodeURIComponent(eventId);
-    // If the app took over, this tab is backgrounded and the timer never fires.
-    setTimeout(function () {
-      if (!document.hidden) window.location.replace(FALLBACK_URL);
-    }, 1500);
+    var appUrl = "ravehub://event?id=" + encodeURIComponent(eventId);
+    document.getElementById("open").href = appUrl;
+    window.location.href = appUrl;
   } else {
     window.location.replace(FALLBACK_URL);
   }

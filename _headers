@@ -1,0 +1,5 @@
+# Apple fetches this to learn which links open the Cuesic app (Universal Links).
+# It must be served as JSON, without redirects.
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600
