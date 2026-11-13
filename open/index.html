@@ -1,0 +1,77 @@
+<!doctype html>
+<!--
+  Cuesic "open the app" page: https://cuesic.com/open/
+
+  The marketing email's "Open Cuesic" button links here. With the app
+  installed, iOS opens Cuesic straight away (Universal Link: /open/* is in
+  .well-known/apple-app-site-association, from build 64) and this page never
+  loads. Otherwise the page tries the app once (ravehub://home, which the app
+  ignores beyond opening) and then stays, with Open and Get the app buttons.
+  Same pattern as the shared-event page in e/index.html, including no
+  automatic App Store redirect: iOS asks "Open in Cuesic?" first, and a timer
+  behind that prompt would send someone who tapped Open to the App Store.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Open Cuesic</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" href="/assets/favicon.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Cuesic" />
+<meta property="og:title" content="Cuesic — Your EDM Home Base" />
+<meta property="og:description" content="Discover EDM shows and festivals, see which friends are going, and keep track of every set you catch." />
+<meta property="og:url" content="https://cuesic.com/open/" />
+<meta property="og:image" content="https://cuesic.com/assets/OG_HomeBase.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://cuesic.com/assets/OG_HomeBase.png" />
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+  h1 { font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.2px; }
+  p { font-size: 14px; margin: 0; color: rgba(255, 255, 255, 0.6); }
+  .actions { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+  .btn { display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 16px; font-size: 16px; font-weight: 800; text-decoration: none; }
+  .btn-primary { background: #9b6bff; color: #fff; }
+  .btn-secondary { background: transparent; color: #9b6bff; border: 1px solid rgba(155, 107, 255, 0.45); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Open Cuesic</h1>
+  <p>Don't have the app yet? Get it free on the App Store.</p>
+  <div class="actions">
+    <a class="btn btn-primary" id="open" href="ravehub://home">Open in Cuesic</a>
+    <a class="btn btn-secondary" id="fallback" href="https://apps.apple.com/us/app/cuesic-rave-edm-events/id6783059635">Get the app</a>
+  </div>
+</main>
+<script>
+  // Try the app once on iPhone and iPad (an iPad can report itself as a Mac);
+  // elsewhere the app can't be installed, so only the buttons show. Either
+  // way the page stays: no automatic App Store redirect.
+  var ua = navigator.userAgent || "";
+  var iOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  if (iOS) window.location.href = "ravehub://home";
+</script>
+</body>
+</html>
